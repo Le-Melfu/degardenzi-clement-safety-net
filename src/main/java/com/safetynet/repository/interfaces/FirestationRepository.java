@@ -1,3 +1,10 @@
+package com.safetynet.repository.interfaces;
+
+
+import com.safetynet.model.Firestation;
+
+import java.util.List;
+
 public interface FirestationRepository {
 
     /**
@@ -14,7 +21,7 @@ public interface FirestationRepository {
      * @return the corresponding Firestation mapping, or null if not found
      */
     Firestation findByAddress(String address);
-    
+
     /**
      * Retrieves a list of addresses covered by a given firestation number.
      *

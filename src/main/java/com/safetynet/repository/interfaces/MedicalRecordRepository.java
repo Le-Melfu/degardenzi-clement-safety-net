@@ -1,5 +1,8 @@
-public interface MedicalRecordRepository {
+package com.safetynet.repository.interfaces;
 
+import com.safetynet.model.MedicalRecord;
+
+public interface MedicalRecordRepository {
     /**
      * Finds a medical record by first and last name.
      *

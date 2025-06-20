@@ -1,33 +1,20 @@
 package com.safetynet.model;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.ToString;
 
 import java.util.List;
 
+@Getter
+@ToString
+@EqualsAndHashCode(of = {"firstName", "lastName"})
+@AllArgsConstructor
 public class MedicalRecord {
-
     private final String firstName;
     private final String lastName;
     private final String birthdate;
     private final List<String> medications;
     private final List<String> allergies;
-
-    /**
-     * Constructor used only to deserialize data from JSON
-     */
-    @JsonCreator
-    public MedicalRecord(
-            @JsonProperty("firstName") String firstName,
-            @JsonProperty("lastName") String lastName,
-            @JsonProperty("birthdate") String birthdate,
-            @JsonProperty("medications") List<String> medications,
-            @JsonProperty("allergies") List<String> allergies
-    ) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.birthdate = birthdate;
-        this.medications = medications;
-        this.allergies = allergies;
-    }
 }

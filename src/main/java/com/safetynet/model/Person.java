@@ -1,9 +1,14 @@
 package com.safetynet.model;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.ToString;
 
+@Getter
+@ToString
+@EqualsAndHashCode(of = {"firstName", "lastName"})
 public class Person {
+
     private final String firstName;
     private final String lastName;
     private final String address;
@@ -12,20 +17,8 @@ public class Person {
     private final String phone;
     private final String email;
 
-
-    /**
-     * Constructor used only to deserialize data from JSON
-     */
-    @JsonCreator
-    public Person(
-            @JsonProperty("firstName") String firstName,
-            @JsonProperty("lastName") String lastName,
-            @JsonProperty("address") String address,
-            @JsonProperty("city") String city,
-            @JsonProperty("zip") String zip,
-            @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email
-    ) {
+    public Person(String firstName, String lastName, String address, String city,
+                  String zip, String phone, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;

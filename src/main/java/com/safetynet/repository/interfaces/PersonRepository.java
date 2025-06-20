@@ -1,3 +1,9 @@
+package com.safetynet.repository.interfaces;
+
+import com.safetynet.model.Person;
+
+import java.util.List;
+
 public interface PersonRepository {
 
     /**
