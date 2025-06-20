@@ -4,15 +4,8 @@ import com.safetynet.model.Person;
 
 import java.util.List;
 
+
 public interface PersonRepository {
-
-    /**
-     * Retrieves all persons in the system.
-     *
-     * @return a list of all persons
-     */
-    List<Person> findAll();
-
     /**
      * Finds a person by their first and last name.
      *

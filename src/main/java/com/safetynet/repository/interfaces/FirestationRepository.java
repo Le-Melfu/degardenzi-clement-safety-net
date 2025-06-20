@@ -35,7 +35,7 @@ public interface FirestationRepository {
      *
      * @param firestation the firestation mapping to create
      */
-    void createNewMapping(Firestation firestation);
+    void createNewFirestation(Firestation firestation);
 
     /**
      * Updates an existing firestation-address mapping.
@@ -43,12 +43,12 @@ public interface FirestationRepository {
      *
      * @param firestation the updated firestation mapping
      */
-    void updateMapping(Firestation firestation);
+    void updateFirestation(Firestation firestation);
 
     /**
      * Deletes a firestation-address mapping by address.
      *
      * @param address the address of the mapping to delete
      */
-    void deleteMappingByAddress(String address);
+    void deleteFirestationByAddress(String address);
 }

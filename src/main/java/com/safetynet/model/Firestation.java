@@ -1,14 +1,12 @@
 package com.safetynet.model;
 
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.*;
 
 @Getter
 @ToString
-@EqualsAndHashCode(of = "address")
+@EqualsAndHashCode(of = {"address", "station"})
 @AllArgsConstructor
+@NoArgsConstructor(force = true)
 public class Firestation {
     private final String address;
     private final String station;
