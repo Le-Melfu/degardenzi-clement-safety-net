@@ -1,0 +1,54 @@
+package com.safetynet.service.implementations;
+
+import com.safetynet.model.Person;
+import com.safetynet.repository.interfaces.PersonRepository;
+import com.safetynet.service.interfaces.PersonService;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class PersonServiceImpl implements PersonService {
+
+    private final PersonRepository personRepository;
+
+    public PersonServiceImpl(PersonRepository personRepository) {
+        this.personRepository = personRepository;
+    }
+
+    public Person getPersonByFullName(String firstName, String lastName) {
+        return personRepository.findByFullName(firstName, lastName);
+    }
+
+    public List<Person> getPersonsByAddress(String address) {
+        return personRepository.findByAddress(address);
+    }
+
+    public List<Person> getPersonsByLastName(String lastName) {
+        return personRepository.findByLastName(lastName);
+    }
+
+    public boolean addPerson(Person person) {
+        if (personRepository.findByFullName(person.getFirstName(), person.getLastName()) == null) {
+            personRepository.createNewPerson(person);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean updatePerson(Person person) {
+        if (personRepository.findByFullName(person.getFirstName(), person.getLastName()) != null) {
+            personRepository.updatePerson(person);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean deletePerson(String firstName, String lastName) {
+        if (personRepository.findByFullName(firstName, lastName) != null) {
+            personRepository.deletePersonByFullName(firstName, lastName);
+            return true;
+        }
+        return false;
+    }
+}

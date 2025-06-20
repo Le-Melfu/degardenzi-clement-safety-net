@@ -4,7 +4,6 @@ import com.safetynet.model.Person;
 
 import java.util.List;
 
-
 public interface PersonRepository {
     /**
      * Finds a person by their first and last name.

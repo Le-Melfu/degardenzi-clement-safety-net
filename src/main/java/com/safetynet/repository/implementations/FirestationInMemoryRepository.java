@@ -12,6 +12,7 @@ public class FirestationInMemoryRepository implements FirestationRepository {
 
     private final List<Firestation> firestationArrayList = new ArrayList<>();
 
+    @SuppressWarnings("PublicMethodNotExposedInInterface")
     public void setData(List<Firestation> data) {
         firestationArrayList.clear();
         firestationArrayList.addAll(data);
@@ -30,6 +31,7 @@ public class FirestationInMemoryRepository implements FirestationRepository {
                 .orElse(null);
     }
 
+    // TODO correct this and move it to Person
     @Override
     public List<String> getAddressesByStation(String station) {
         return firestationArrayList.stream()

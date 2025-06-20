@@ -12,6 +12,7 @@ public class PersonInMemoryRepository implements PersonRepository {
 
     private final List<Person> persons = new ArrayList<>();
 
+    @SuppressWarnings("PublicMethodNotExposedInInterface")
     public void setData(List<Person> data) {
         persons.clear();
         persons.addAll(data);

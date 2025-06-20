@@ -12,6 +12,7 @@ public class MedicalRecordInMemoryRepository implements MedicalRecordRepository 
 
     private final List<MedicalRecord> records = new ArrayList<>();
 
+    @SuppressWarnings("PublicMethodNotExposedInInterface")
     public void setData(List<MedicalRecord> data) {
         records.clear();
         records.addAll(data);
