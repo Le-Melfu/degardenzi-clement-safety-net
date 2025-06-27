@@ -32,10 +32,10 @@ public class FirestationInMemoryRepository implements FirestationRepository {
     }
 
     @Override
-    public String getStationAdress(String station) {
+    public List<String> getStationAdresses(String station) {
         return firestationArrayList.stream()
                 .filter(f -> f.getStation().equals(station))
-                .map(Firestation::getAddress).findFirst().orElse(null);
+                .map(Firestation::getAddress).toList();
     }
 
     @Override

@@ -36,13 +36,13 @@ public class FirestationServiceImpl implements FirestationService {
     }
 
     @Override
-    public String getStationAdress(String stationNumber) {
-        return firestationRepository.getStationAdress(stationNumber);
+    public List<String> getStationAdresses(String stationNumber) {
+        return firestationRepository.getStationAdresses(stationNumber);
     }
 
     @Override
     public FirestationCoverageDTO getPersonsCoveredByStation(String stationNumber) {
-        String stationAddress = getStationAdress(stationNumber);
+        String stationAddresses = getStationAdresses(stationNumber);
 
         List<Person> persons = personService.getAllPersons().stream()
                 .filter(p -> stationAddress.contains(p.getAddress()))

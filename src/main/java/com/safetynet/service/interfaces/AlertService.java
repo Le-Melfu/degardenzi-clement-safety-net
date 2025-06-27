@@ -1,9 +1,10 @@
 package com.safetynet.service.interfaces;
 
 import com.safetynet.model.dto.ChildAlertDTO;
+import com.safetynet.model.dto.FireIncidentDTO;
+import com.safetynet.model.dto.HouseholdWithMedicalDataDTO;
 
 import java.util.List;
-import java.util.Map;
 
 public interface AlertService {
 
@@ -11,9 +12,9 @@ public interface AlertService {
 
     List<String> getPhoneNumbersByStation(String stationNumber);
 
-    Object getHouseholdAndMedicalInfo(String address);
+    public FireIncidentDTO getFireIncidentByAddress(String address);
 
-    Map<String, List<Object>> getHouseholdsByStations(List<String> stationNumbers);
+    public List<HouseholdWithMedicalDataDTO> getHouseholdWithMedicalByStation(String stationNumbers);
 
     Object getDetailedPersonInfo(String firstName, String lastName);
 

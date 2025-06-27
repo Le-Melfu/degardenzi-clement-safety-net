@@ -1,9 +1,9 @@
 package com.safetynet.service.implementations;
 
+import com.safetynet.model.Firestation;
+import com.safetynet.model.MedicalRecord;
 import com.safetynet.model.Person;
-import com.safetynet.model.dto.ChildAlertDTO;
-import com.safetynet.model.dto.ChildDTO;
-import com.safetynet.model.dto.PersonPublicInfosDTO;
+import com.safetynet.model.dto.*;
 import com.safetynet.service.interfaces.AlertService;
 import com.safetynet.service.interfaces.FirestationService;
 import com.safetynet.service.interfaces.MedicalRecordService;
@@ -11,8 +11,8 @@ import com.safetynet.service.interfaces.PersonService;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class AlertServiceImpl implements AlertService {
@@ -70,26 +70,57 @@ public class AlertServiceImpl implements AlertService {
     }
 
     @Override
-    public Object getHouseholdAndMedicalInfo(String address) {
-        // TODO: logic for /fire
-        return null;
+    public FireIncidentDTO getFireIncidentByAddress(String address) {
+        Firestation station = firestationService.getFirestationByAddress(address);
+        if (station == null) {
+            return null;
+        }
+        String stationNumber = station.getStation();
+
+        List<Person> residents = personService.getPersonsByAddress(address);
+
+        List<PersonWithMedicalDataDTO> personsMedicalInfos = residents.stream().map(person -> {
+            MedicalRecord record = medicalRecordService.getMedicalRecordByFullName(
+                    person.getFirstName(), person.getLastName());
+
+
+            int age = medicalRecordService.calculateAge(record != null ? record.getBirthdate() : null);
+
+            return new PersonWithMedicalDataDTO(
+                    person.getFirstName(),
+                    person.getLastName(),
+                    person.getPhone(),
+                    age,
+                    record != null ? record.getMedications() : Collections.emptyList(),
+                    record != null ? record.getAllergies() : Collections.emptyList()
+            );
+        }).toList();
+
+        // 4. Retourner le DTO
+        return new FireIncidentDTO(stationNumber, personsMedicalInfos);
     }
 
+
     @Override
-    public Map<String, List<Object>> getHouseholdsByStations(List<String> stationNumbers) {
-        // TODO: logic for /flood/stations
-        return Map.of();
+    public List<HouseholdWithMedicalDataDTO> getHouseholdWithMedicalByStations(List<String> stationNumber) {
+        /*
+         * pour chaque station passée en paramètre,
+         * retourner la liste des habitants desservis par cette station
+         * regroupés par adresse
+         * avec leurs infos médicales
+         * */
     }
+
 
     @Override
     public Object getDetailedPersonInfo(String firstName, String lastName) {
-        // TODO: logic for /personInfo
+        // TODO
         return null;
     }
 
     @Override
     public List<String> getEmailsByCity(String city) {
-        // TODO: logic for /communityEmail
+        // TODO
         return List.of();
     }
 }
