@@ -35,14 +35,6 @@ public class PersonInMemoryRepository implements PersonRepository {
     }
 
     @Override
-    public List<Person> findByLastName(String lastName) {
-        List<Person> persons = FakeDatabase.getPersons();
-        return persons.stream()
-                .filter(p -> p.getLastName().equalsIgnoreCase(lastName))
-                .toList();
-    }
-
-    @Override
     public void createNewPerson(Person person) {
         List<Person> persons = FakeDatabase.getPersons();
         boolean exists = persons.stream()

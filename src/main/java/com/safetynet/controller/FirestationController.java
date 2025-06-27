@@ -1,6 +1,6 @@
 package com.safetynet.controller;
 
-import com.safetynet.model.Firestation;
+import com.safetynet.model.FirestationMapping;
 import com.safetynet.model.dto.FirestationCoverageDTO;
 import com.safetynet.service.interfaces.FirestationService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -44,8 +44,8 @@ public class FirestationController {
             @ApiResponse(responseCode = "400", description = "Invalid input")
     })
     @PostMapping
-    public ResponseEntity<Void> createMapping(@RequestBody Firestation firestation) {
-        boolean created = firestationService.createNewFirestation(firestation);
+    public ResponseEntity<Void> createMapping(@RequestBody FirestationMapping firestationMapping) {
+        boolean created = firestationService.createNewFirestation(firestationMapping);
         return created
                 ? ResponseEntity.status(201).build()
                 : ResponseEntity.status(409).build();
@@ -62,8 +62,8 @@ public class FirestationController {
             @ApiResponse(responseCode = "400", description = "Invalid input")
     })
     @PutMapping
-    public ResponseEntity<Void> updateMapping(@RequestBody Firestation firestation) {
-        boolean updated = firestationService.updateFirestation(firestation);
+    public ResponseEntity<Void> updateMapping(@RequestBody FirestationMapping firestationMapping) {
+        boolean updated = firestationService.updateFirestation(firestationMapping);
         return updated
                 ? ResponseEntity.ok().build()
                 : ResponseEntity.notFound().build();

@@ -8,11 +8,7 @@ public interface PersonService {
 
     List<Person> getAllPersons();
 
-    Person getPersonByFullName(String firstName, String lastName);
-
     List<Person> getPersonsByAddress(String address);
-
-    List<Person> getPersonsByLastName(String lastName);
 
     boolean addPerson(Person person);
 

@@ -7,7 +7,7 @@ import lombok.*;
 @EqualsAndHashCode(of = {"address", "station"})
 @AllArgsConstructor
 @NoArgsConstructor(force = true)
-public class Firestation {
+public class FirestationMapping {
     private final String address;
     private final String station;
 }

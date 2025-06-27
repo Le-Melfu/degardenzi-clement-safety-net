@@ -1,6 +1,6 @@
 package com.safetynet.service.implementations;
 
-import com.safetynet.model.Firestation;
+import com.safetynet.model.FirestationMapping;
 import com.safetynet.model.Person;
 import com.safetynet.model.dto.FirestationCoverageDTO;
 import com.safetynet.model.dto.PersonPublicInfosDTO;
@@ -25,13 +25,9 @@ public class FirestationServiceImpl implements FirestationService {
         this.medicalRecordService = medicalRecordService;
     }
 
-    @Override
-    public List<Firestation> getAllFirestations() {
-        return firestationRepository.findAll();
-    }
 
     @Override
-    public Firestation getFirestationByAddress(String address) {
+    public FirestationMapping getFirestationByAddress(String address) {
         return firestationRepository.findByAddress(address);
     }
 
@@ -69,18 +65,18 @@ public class FirestationServiceImpl implements FirestationService {
     }
 
     @Override
-    public boolean createNewFirestation(Firestation firestation) {
-        if (firestationRepository.findByAddress(firestation.getAddress()) == null) {
-            firestationRepository.createNewFirestationMapping(firestation);
+    public boolean createNewFirestation(FirestationMapping firestationMapping) {
+        if (firestationRepository.findByAddress(firestationMapping.getAddress()) == null) {
+            firestationRepository.createNewFirestationMapping(firestationMapping);
             return true;
         }
         return false;
     }
 
     @Override
-    public boolean updateFirestation(Firestation firestation) {
-        if (firestationRepository.findByAddress(firestation.getAddress()) != null) {
-            firestationRepository.updateFirestationMapping(firestation);
+    public boolean updateFirestation(FirestationMapping firestationMapping) {
+        if (firestationRepository.findByAddress(firestationMapping.getAddress()) != null) {
+            firestationRepository.updateFirestationMapping(firestationMapping);
             return true;
         }
         return false;

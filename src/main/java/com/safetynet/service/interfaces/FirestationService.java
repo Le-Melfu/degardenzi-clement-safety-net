@@ -1,22 +1,20 @@
 package com.safetynet.service.interfaces;
 
-import com.safetynet.model.Firestation;
+import com.safetynet.model.FirestationMapping;
 import com.safetynet.model.dto.FirestationCoverageDTO;
 
 import java.util.List;
 
 public interface FirestationService {
-    List<Firestation> getAllFirestations();
-
-    Firestation getFirestationByAddress(String address);
+    FirestationMapping getFirestationByAddress(String address);
 
     List<String> getStationAdresses(String stationNumber);
 
     FirestationCoverageDTO getPersonsCoveredByStation(String stationNumber);
 
-    boolean createNewFirestation(Firestation firestation);
+    boolean createNewFirestation(FirestationMapping firestationMapping);
 
-    boolean updateFirestation(Firestation firestation);
+    boolean updateFirestation(FirestationMapping firestationMapping);
 
     boolean deleteFirestationByAddress(String address);
 }

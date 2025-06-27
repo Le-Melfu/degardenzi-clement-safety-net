@@ -1,6 +1,6 @@
 package com.safetynet.service.implementations;
 
-import com.safetynet.model.Firestation;
+import com.safetynet.model.FirestationMapping;
 import com.safetynet.model.MedicalRecord;
 import com.safetynet.model.Person;
 import com.safetynet.model.dto.*;
@@ -72,7 +72,7 @@ public class AlertServiceImpl implements AlertService {
 
     @Override
     public FireIncidentDTO getFireIncidentByAddress(String address) {
-        Firestation station = firestationService.getFirestationByAddress(address);
+        FirestationMapping station = firestationService.getFirestationByAddress(address);
         if (station == null) {
             return null;
         }

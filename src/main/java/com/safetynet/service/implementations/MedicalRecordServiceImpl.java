@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 
 @Service
 public class MedicalRecordServiceImpl implements MedicalRecordService {
@@ -27,18 +26,6 @@ public class MedicalRecordServiceImpl implements MedicalRecordService {
     @Override
     public String getBirthdate(String firstName, String lastName) {
         return medicalRecordRepository.getBirthdateByFullName(firstName, lastName);
-    }
-
-    @Override
-    public List<String> getMedications(String firstName, String lastName) {
-        MedicalRecord record = getMedicalRecordByFullName(firstName, lastName);
-        return record != null ? record.getMedications() : List.of();
-    }
-
-    @Override
-    public List<String> getAllergies(String firstName, String lastName) {
-        MedicalRecord record = getMedicalRecordByFullName(firstName, lastName);
-        return record != null ? record.getAllergies() : List.of();
     }
 
     @Override

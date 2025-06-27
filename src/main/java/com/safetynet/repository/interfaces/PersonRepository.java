@@ -26,14 +26,6 @@ public interface PersonRepository {
     List<Person> findByAddress(String address);
 
     /**
-     * Retrieves all persons with the specified last name.
-     *
-     * @param lastName the last name to filter by
-     * @return a list of persons with the given last name
-     */
-    List<Person> findByLastName(String lastName);
-
-    /**
      * Adds a new person to the repository.
      *
      * @param person the person to add

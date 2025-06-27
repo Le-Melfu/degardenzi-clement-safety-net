@@ -7,17 +7,17 @@ import java.util.List;
 
 public class Data {
     private final List<Person> persons;
-    private final List<Firestation> firestations;
+    private final List<FirestationMapping> firestationMappings;
     private final List<MedicalRecord> medicalrecords;
 
     @JsonCreator
     public Data(
             @JsonProperty("persons") List<Person> persons,
-            @JsonProperty("firestations") List<Firestation> firestations,
+            @JsonProperty("firestations") List<FirestationMapping> firestationMappings,
             @JsonProperty("medicalrecords") List<MedicalRecord> medicalrecords
     ) {
         this.persons = persons;
-        this.firestations = firestations;
+        this.firestationMappings = firestationMappings;
         this.medicalrecords = medicalrecords;
     }
 
@@ -25,8 +25,8 @@ public class Data {
         return persons;
     }
 
-    public List<Firestation> getFirestations() {
-        return firestations;
+    public List<FirestationMapping> getFirestations() {
+        return firestationMappings;
     }
 
     public List<MedicalRecord> getMedicalrecords() {
