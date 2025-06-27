@@ -42,10 +42,9 @@ public class FirestationServiceImpl implements FirestationService {
 
     @Override
     public FirestationCoverageDTO getPersonsCoveredByStation(String stationNumber) {
-        String stationAddresses = getStationAdresses(stationNumber);
-
-        List<Person> persons = personService.getAllPersons().stream()
-                .filter(p -> stationAddress.contains(p.getAddress()))
+        List<String> stationAddresses = getStationAdresses(stationNumber);
+        List<Person> persons = stationAddresses.stream()
+                .flatMap(address -> personService.getPersonsByAddress(address).stream())
                 .toList();
 
         List<PersonPublicInfosDTO> personDtos = persons.stream()

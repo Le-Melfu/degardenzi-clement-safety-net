@@ -10,7 +10,7 @@ public interface FirestationService {
 
     Firestation getFirestationByAddress(String address);
 
-    String getStationAdresses(String stationNumber);
+    List<String> getStationAdresses(String stationNumber);
 
     FirestationCoverageDTO getPersonsCoveredByStation(String stationNumber);
 
