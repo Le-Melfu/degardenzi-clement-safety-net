@@ -70,7 +70,9 @@ public class MedicalRecordServiceImpl implements MedicalRecordService {
 
     @Override
     public int calculateAge(String birthdate) {
-        if (birthdate == null) return 0;
+        if (birthdate == null || birthdate.isBlank()) {
+            throw new IllegalArgumentException("Birthdate is missing for this person");
+        }
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
         LocalDate birth = LocalDate.parse(birthdate, formatter);

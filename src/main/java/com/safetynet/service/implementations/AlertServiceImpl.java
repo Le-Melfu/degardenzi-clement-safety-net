@@ -1,11 +1,16 @@
 package com.safetynet.service.implementations;
 
+import com.safetynet.model.Person;
+import com.safetynet.model.dto.ChildAlertDTO;
+import com.safetynet.model.dto.ChildDTO;
+import com.safetynet.model.dto.PersonPublicInfosDTO;
 import com.safetynet.service.interfaces.AlertService;
 import com.safetynet.service.interfaces.FirestationService;
 import com.safetynet.service.interfaces.MedicalRecordService;
 import com.safetynet.service.interfaces.PersonService;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -28,15 +33,40 @@ public class AlertServiceImpl implements AlertService {
 
 
     @Override
-    public Object getChildrenByAddress(String address) {
-        // TODO: logic for /childAlert
-        return null;
+    public ChildAlertDTO getChildrenByAddress(String address) {
+        List<Person> residents = personService.getPersonsByAddress(address);
+
+        List<ChildDTO> children = new ArrayList<>();
+        List<PersonPublicInfosDTO> otherMembers = new ArrayList<>();
+
+        for (Person p : residents) {
+            try {
+                String birthdate = medicalRecordService.getBirthdate(p.getFirstName(), p.getLastName());
+                int age = medicalRecordService.calculateAge(birthdate);
+
+                if (age <= 18) {
+                    children.add(new ChildDTO(p.getFirstName(), p.getLastName(), age));
+                } else {
+                    otherMembers.add(new PersonPublicInfosDTO(p.getFirstName(), p.getLastName(), p.getAddress(), p.getPhone()));
+                }
+
+            } catch (IllegalArgumentException e) {
+                // TODO: add log
+            }
+        }
+
+        return new ChildAlertDTO(children, otherMembers);
     }
 
     @Override
     public List<String> getPhoneNumbersByStation(String stationNumber) {
-        // TODO: logic for /phoneAlert
-        return List.of();
+        String address = firestationService.getStationAdress(stationNumber);
+        List<Person> persons = personService.getPersonsByAddress(address);
+
+        return persons.stream()
+                .map(Person::getPhone)
+                .distinct()
+                .toList();
     }
 
     @Override

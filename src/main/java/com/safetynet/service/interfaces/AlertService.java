@@ -1,11 +1,13 @@
 package com.safetynet.service.interfaces;
 
+import com.safetynet.model.dto.ChildAlertDTO;
+
 import java.util.List;
 import java.util.Map;
 
 public interface AlertService {
 
-    Object getChildrenByAddress(String address);
+    ChildAlertDTO getChildrenByAddress(String address);
 
     List<String> getPhoneNumbersByStation(String stationNumber);
 
