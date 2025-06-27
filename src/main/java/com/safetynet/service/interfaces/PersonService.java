@@ -5,6 +5,9 @@ import com.safetynet.model.Person;
 import java.util.List;
 
 public interface PersonService {
+
+    List<Person> getAllPersons();
+
     Person getPersonByFullName(String firstName, String lastName);
 
     List<Person> getPersonsByAddress(String address);

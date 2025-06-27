@@ -31,13 +31,11 @@ public class FirestationInMemoryRepository implements FirestationRepository {
                 .orElse(null);
     }
 
-    // TODO correct this and move it to Person
     @Override
-    public List<String> getAddressesByStation(String station) {
+    public String getStationAdress(String station) {
         return firestationArrayList.stream()
                 .filter(f -> f.getStation().equals(station))
-                .map(Firestation::getAddress)
-                .toList();
+                .map(Firestation::getAddress).findFirst().orElse(null);
     }
 
     @Override

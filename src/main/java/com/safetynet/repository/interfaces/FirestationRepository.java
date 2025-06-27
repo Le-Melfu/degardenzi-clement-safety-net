@@ -28,7 +28,7 @@ public interface FirestationRepository {
      * @param station the firestation number
      * @return a list of addresses associated with the given station
      */
-    List<String> getAddressesByStation(String station);
+    String getStationAdress(String station);
 
     /**
      * Adds a new firestation-address mapping to the repository.

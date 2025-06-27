@@ -24,8 +24,8 @@ public class FirestationServiceImpl implements FirestationService {
         return firestationRepository.findByAddress(address);
     }
 
-    public List<String> getAddressesByStation(String stationNumber) {
-        return firestationRepository.getAddressesByStation(stationNumber);
+    public String getStationAdress(String stationNumber) {
+        return firestationRepository.getStationAdress(stationNumber);
     }
 
     public boolean createNewFirestation(Firestation firestation) {

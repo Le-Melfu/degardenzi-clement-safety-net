@@ -1,5 +1,6 @@
 package com.safetynet.service.implementations;
 
+import com.safetynet.model.Person;
 import com.safetynet.model.dto.FirestationCoverageDTO;
 import com.safetynet.model.dto.PersonPublicInfosDTO;
 import com.safetynet.service.AlertService;
@@ -33,12 +34,10 @@ public class AlertServiceImpl implements AlertService {
 
     @Override
     public FirestationCoverageDTO getPersonsCoveredByStation(String stationNumber) {
-        List<String> addresses = firestationService.getAddressesByStation(stationNumber);
+        String addresses = firestationService.getStationAdress(stationNumber);
 
-        /* TODO correct this
-        List<Person> coveredPersons = personService.getAllPersons().stream()
-                .filter(p -> addresses.contains(p.getAdress()))
-                .toList();*/
+        List<Person> coveredPersons = personService.getAllPersons().stream().filter(p -> addresses.contains(p.getAddress()))
+                .toList();
 
         List<PersonPublicInfosDTO> persons = coveredPersons.stream()
                 .map(p -> new PersonPublicInfosDTO(

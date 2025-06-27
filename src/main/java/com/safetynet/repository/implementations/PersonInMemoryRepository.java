@@ -17,6 +17,11 @@ public class PersonInMemoryRepository implements PersonRepository {
         persons.clear();
         persons.addAll(data);
     }
+    
+    @Override
+    public List<Person> getAll() {
+        return persons;
+    }
 
     @Override
     public Person findByFullName(String firstName, String lastName) {

@@ -16,6 +16,11 @@ public class PersonServiceImpl implements PersonService {
         this.personRepository = personRepository;
     }
 
+    @Override
+    public List<Person> getAllPersons() {
+        return personRepository.getAll();
+    }
+
     public Person getPersonByFullName(String firstName, String lastName) {
         return personRepository.findByFullName(firstName, lastName);
     }

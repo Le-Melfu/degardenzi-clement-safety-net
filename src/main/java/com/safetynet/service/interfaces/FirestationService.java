@@ -9,7 +9,7 @@ public interface FirestationService {
 
     Firestation getFirestationByAddress(String address);
 
-    List<String> getAddressesByStation(String stationNumber);
+    String getStationAdress(String stationNumber);
 
     boolean createNewFirestation(Firestation firestation);
 
