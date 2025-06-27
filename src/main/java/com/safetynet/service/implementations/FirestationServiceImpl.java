@@ -66,7 +66,11 @@ public class FirestationServiceImpl implements FirestationService {
 
     @Override
     public boolean createNewFirestation(FirestationMapping firestationMapping) {
-        if (firestationRepository.findByAddress(firestationMapping.getAddress()) == null) {
+        boolean alreadyExists = firestationRepository.findAll().stream()
+                .anyMatch(fs -> fs.getAddress().equalsIgnoreCase(firestationMapping.getAddress())
+                        && fs.getStation().equalsIgnoreCase(firestationMapping.getStation()));
+
+        if (!alreadyExists) {
             firestationRepository.createNewFirestationMapping(firestationMapping);
             return true;
         }

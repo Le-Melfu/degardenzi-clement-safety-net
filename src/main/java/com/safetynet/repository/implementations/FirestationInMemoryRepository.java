@@ -11,6 +11,11 @@ import java.util.List;
 public class FirestationInMemoryRepository implements FirestationRepository {
 
     @Override
+    public List<FirestationMapping> findAll() {
+        return FakeDatabase.getFirestationMappings();
+    }
+
+    @Override
     public FirestationMapping findByAddress(String address) {
         List<FirestationMapping> firestationMappingArrayList = FakeDatabase.getFirestationMappings();
 

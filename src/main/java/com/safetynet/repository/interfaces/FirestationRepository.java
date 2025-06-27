@@ -6,6 +6,9 @@ import com.safetynet.model.FirestationMapping;
 import java.util.List;
 
 public interface FirestationRepository {
+
+    List<FirestationMapping> findAll();
+
     /**
      * Finds a firestation mapping by address.
      *
