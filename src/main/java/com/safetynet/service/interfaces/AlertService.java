@@ -1,23 +1,24 @@
-package com.safetynet.service;
+package com.safetynet.service.interfaces;
+
+import com.safetynet.model.dto.ChildAlertDTO;
+import com.safetynet.model.dto.FireIncidentDTO;
+import com.safetynet.model.dto.PersonWithMedicalDataDTO;
+import com.safetynet.model.dto.StationFloodCoverageDTO;
 
 import java.util.List;
-import java.util.Map;
 
 public interface AlertService {
 
-    Object getPersonsCoveredByStation(String stationNumber);
-
-    Object getChildrenByAddress(String address);
+    ChildAlertDTO getChildrenByAddress(String address);
 
     List<String> getPhoneNumbersByStation(String stationNumber);
 
-    Object getHouseholdAndMedicalInfo(String address);
+    FireIncidentDTO getFireIncidentByAddress(String address);
 
-    Map<String, List<Object>> getHouseholdsByStations(List<String> stationNumbers);
+    List<StationFloodCoverageDTO> getStationsFloodCoverage(List<String> stationNumbers);
 
-    Object getDetailedPersonInfo(String firstName, String lastName);
+    List<PersonWithMedicalDataDTO> getPersonsInfosByLastName(String lastName);
 
     List<String> getEmailsByCity(String city);
 
-    int calculateAge(String birthdate);
 }

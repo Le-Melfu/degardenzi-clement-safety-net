@@ -1,25 +1,18 @@
 package com.safetynet.repository.implementations;
 
+import com.safetynet.config.loader.FakeDatabase;
 import com.safetynet.model.MedicalRecord;
 import com.safetynet.repository.interfaces.MedicalRecordRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Repository
 public class MedicalRecordInMemoryRepository implements MedicalRecordRepository {
 
-    private final List<MedicalRecord> records = new ArrayList<>();
-
-    @SuppressWarnings("PublicMethodNotExposedInInterface")
-    public void setData(List<MedicalRecord> data) {
-        records.clear();
-        records.addAll(data);
-    }
-
     @Override
     public MedicalRecord findByFullName(String firstName, String lastName) {
+        List<MedicalRecord> records = FakeDatabase.getMedicalrecords();
         return records.stream()
                 .filter(r -> r.getFirstName().equalsIgnoreCase(firstName)
                         && r.getLastName().equalsIgnoreCase(lastName))
@@ -35,6 +28,7 @@ public class MedicalRecordInMemoryRepository implements MedicalRecordRepository 
 
     @Override
     public void createNewMedicalRecord(MedicalRecord record) {
+        List<MedicalRecord> records = FakeDatabase.getMedicalrecords();
         boolean exists = records.stream()
                 .anyMatch(r -> r.getFirstName().equalsIgnoreCase(record.getFirstName())
                         && r.getLastName().equalsIgnoreCase(record.getLastName()));
@@ -45,6 +39,7 @@ public class MedicalRecordInMemoryRepository implements MedicalRecordRepository 
 
     @Override
     public void updateMedicalRecord(MedicalRecord record) {
+        List<MedicalRecord> records = FakeDatabase.getMedicalrecords();
         for (int i = 0; i < records.size(); i++) {
             MedicalRecord existing = records.get(i);
             if (existing.getFirstName().equalsIgnoreCase(record.getFirstName()) &&
@@ -57,6 +52,7 @@ public class MedicalRecordInMemoryRepository implements MedicalRecordRepository 
 
     @Override
     public void deleteMedicalRecordByFullName(String firstName, String lastName) {
+        List<MedicalRecord> records = FakeDatabase.getMedicalrecords();
         records.removeIf(r -> r.getFirstName().equalsIgnoreCase(firstName)
                 && r.getLastName().equalsIgnoreCase(lastName));
     }

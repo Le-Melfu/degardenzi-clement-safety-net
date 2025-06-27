@@ -28,14 +28,14 @@ public interface FirestationRepository {
      * @param station the firestation number
      * @return a list of addresses associated with the given station
      */
-    String getStationAdress(String station);
+    List<String> getStationAdresses(String station);
 
     /**
      * Adds a new firestation-address mapping to the repository.
      *
      * @param firestation the firestation mapping to create
      */
-    void createNewFirestation(Firestation firestation);
+    void createNewFirestationMapping(Firestation firestation);
 
     /**
      * Updates an existing firestation-address mapping.
@@ -43,12 +43,12 @@ public interface FirestationRepository {
      *
      * @param firestation the updated firestation mapping
      */
-    void updateFirestation(Firestation firestation);
+    void updateFirestationMapping(Firestation firestation);
 
     /**
      * Deletes a firestation-address mapping by address.
      *
      * @param address the address of the mapping to delete
      */
-    void deleteFirestationByAddress(String address);
+    void deleteFirestationMappingByAddress(String address);
 }

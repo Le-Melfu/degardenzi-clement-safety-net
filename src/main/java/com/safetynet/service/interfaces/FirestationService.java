@@ -1,6 +1,7 @@
 package com.safetynet.service.interfaces;
 
 import com.safetynet.model.Firestation;
+import com.safetynet.model.dto.FirestationCoverageDTO;
 
 import java.util.List;
 
@@ -9,7 +10,9 @@ public interface FirestationService {
 
     Firestation getFirestationByAddress(String address);
 
-    String getStationAdress(String stationNumber);
+    List<String> getStationAdresses(String stationNumber);
+
+    FirestationCoverageDTO getPersonsCoveredByStation(String stationNumber);
 
     boolean createNewFirestation(Firestation firestation);
 

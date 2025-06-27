@@ -18,4 +18,7 @@ public interface MedicalRecordService {
     boolean updateMedicalRecord(MedicalRecord record);
 
     boolean deleteMedicalRecord(String firstName, String lastName);
+
+    int calculateAge(String birthdate);
+
 }
