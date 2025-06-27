@@ -1,17 +1,11 @@
 package com.safetynet.service.implementations;
 
-import com.safetynet.model.Person;
-import com.safetynet.model.dto.FirestationCoverageDTO;
-import com.safetynet.model.dto.PersonPublicInfosDTO;
-import com.safetynet.service.AlertService;
+import com.safetynet.service.interfaces.AlertService;
 import com.safetynet.service.interfaces.FirestationService;
 import com.safetynet.service.interfaces.MedicalRecordService;
 import com.safetynet.service.interfaces.PersonService;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.time.Period;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 
@@ -30,34 +24,6 @@ public class AlertServiceImpl implements AlertService {
         this.personService = personService;
         this.medicalRecordService = medicalRecordService;
         this.firestationService = firestationService;
-    }
-
-    @Override
-    public FirestationCoverageDTO getPersonsCoveredByStation(String stationNumber) {
-        String addresses = firestationService.getStationAdress(stationNumber);
-
-        List<Person> coveredPersons = personService.getAllPersons().stream().filter(p -> addresses.contains(p.getAddress()))
-                .toList();
-
-        List<PersonPublicInfosDTO> persons = coveredPersons.stream()
-                .map(p -> new PersonPublicInfosDTO(
-                        p.getFirstName(),
-                        p.getLastName(),
-                        p.getAddress(),
-                        p.getPhone()
-                ))
-                .toList();
-
-        int childCount = (int) coveredPersons.stream()
-                .filter(p -> {
-                    String birthdate = medicalRecordService.getBirthdate(p.getFirstName(), p.getLastName());
-                    return calculateAge(birthdate) < 18;
-                })
-                .count();
-
-        int adultCount = persons.size() - childCount;
-
-        return new FirestationCoverageDTO(persons, adultCount, childCount);
     }
 
 
@@ -95,14 +61,5 @@ public class AlertServiceImpl implements AlertService {
     public List<String> getEmailsByCity(String city) {
         // TODO: logic for /communityEmail
         return List.of();
-    }
-
-    @Override
-    public int calculateAge(String birthdate) {
-        if (birthdate == null) return 0;
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
-        LocalDate birth = LocalDate.parse(birthdate, formatter);
-        return Period.between(birth, LocalDate.now()).getYears();
     }
 }

@@ -21,18 +21,22 @@ public class PersonServiceImpl implements PersonService {
         return personRepository.getAll();
     }
 
+    @Override
     public Person getPersonByFullName(String firstName, String lastName) {
         return personRepository.findByFullName(firstName, lastName);
     }
 
+    @Override
     public List<Person> getPersonsByAddress(String address) {
         return personRepository.findByAddress(address);
     }
 
+    @Override
     public List<Person> getPersonsByLastName(String lastName) {
         return personRepository.findByLastName(lastName);
     }
 
+    @Override
     public boolean addPerson(Person person) {
         if (personRepository.findByFullName(person.getFirstName(), person.getLastName()) == null) {
             personRepository.createNewPerson(person);
@@ -41,6 +45,7 @@ public class PersonServiceImpl implements PersonService {
         return false;
     }
 
+    @Override
     public boolean updatePerson(Person person) {
         if (personRepository.findByFullName(person.getFirstName(), person.getLastName()) != null) {
             personRepository.updatePerson(person);
@@ -49,6 +54,7 @@ public class PersonServiceImpl implements PersonService {
         return false;
     }
 
+    @Override
     public boolean deletePerson(String firstName, String lastName) {
         if (personRepository.findByFullName(firstName, lastName) != null) {
             personRepository.deletePersonByFullName(firstName, lastName);

@@ -1,11 +1,9 @@
-package com.safetynet.service;
+package com.safetynet.service.interfaces;
 
 import java.util.List;
 import java.util.Map;
 
 public interface AlertService {
-
-    Object getPersonsCoveredByStation(String stationNumber);
 
     Object getChildrenByAddress(String address);
 
@@ -19,5 +17,4 @@ public interface AlertService {
 
     List<String> getEmailsByCity(String city);
 
-    int calculateAge(String birthdate);
 }
