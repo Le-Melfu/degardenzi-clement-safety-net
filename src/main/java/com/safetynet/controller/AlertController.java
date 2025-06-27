@@ -2,8 +2,8 @@ package com.safetynet.controller;
 
 import com.safetynet.model.dto.ChildAlertDTO;
 import com.safetynet.model.dto.FireIncidentDTO;
-import com.safetynet.model.dto.FloodCoverageDTO;
 import com.safetynet.model.dto.PersonWithMedicalDataDTO;
+import com.safetynet.model.dto.StationFloodCoverageDTO;
 import com.safetynet.service.interfaces.AlertService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -83,29 +83,35 @@ public class AlertController {
             description = "Returns grouped households by address with resident medical data."
     )
     @ApiResponse(responseCode = "200", description = "Flood coverage returned")
+    @ApiResponse(responseCode = "400", description = "Invalid station list")
     @GetMapping("/flood/stations")
-    public ResponseEntity<FloodCoverageDTO> getFloodCoverage(@RequestParam List<String> stations) {
-        /*
-         * pour chaque station passée en paramètre,
-         * retourner la liste des habitants desservis par cette station
-         * regroupés par adresse
-         * avec leurs infos médicales
-         * */
+    public ResponseEntity<List<StationFloodCoverageDTO>> getFloodCoverage(@RequestParam List<String> stations) {
+        if (stations == null || stations.isEmpty()) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        List<StationFloodCoverageDTO> stationFloodCoverageDTOS = alertService.getStationsFloodCoverage(stations);
+
+        return ResponseEntity.ok(stationFloodCoverageDTOS);
     }
 
 
     //   ../personInfolastName=<lastName>
     @Operation(
-            summary = "Get detailed personal information",
-            description = "Returns age, address, email and medical info for matching individuals."
+            summary = "Get medical info by last name",
+            description = "Returns all persons with the given last name and their medical info"
     )
     @ApiResponse(responseCode = "200", description = "Person info returned")
-    @GetMapping("/personInfo")
-    public ResponseEntity<List<PersonWithMedicalDataDTO>> getPersonInfo(
-            @RequestParam String lastName
-    ) {
-        // TODO: implement personInfo logic
-        return ResponseEntity.ok(List.of());
+    @ApiResponse(responseCode = "404", description = "No person found with this last name")
+    @GetMapping("/personInfosLastName")
+    public ResponseEntity<List<PersonWithMedicalDataDTO>> getPersonInfosByLastName(@RequestParam String lastName) {
+        List<PersonWithMedicalDataDTO> persons = alertService.getPersonsInfosByLastName(lastName);
+
+        if (persons.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(persons);
     }
 
 
@@ -115,9 +121,15 @@ public class AlertController {
             description = "Returns email addresses of all residents living in the given city."
     )
     @ApiResponse(responseCode = "200", description = "Email list returned")
+    @ApiResponse(responseCode = "400", description = "City is missing or invalid")
     @GetMapping("/communityEmail")
     public ResponseEntity<List<String>> getEmailsByCity(@RequestParam String city) {
-        // TODO: implement communityEmail logic
-        return ResponseEntity.ok(List.of());
+        if (city == null || city.isBlank()) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        List<String> emails = alertService.getEmailsByCity(city);
+
+        return ResponseEntity.ok(emails);
     }
 }

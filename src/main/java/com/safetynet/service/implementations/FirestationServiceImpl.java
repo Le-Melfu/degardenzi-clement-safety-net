@@ -71,7 +71,7 @@ public class FirestationServiceImpl implements FirestationService {
     @Override
     public boolean createNewFirestation(Firestation firestation) {
         if (firestationRepository.findByAddress(firestation.getAddress()) == null) {
-            firestationRepository.createNewFirestation(firestation);
+            firestationRepository.createNewFirestationMapping(firestation);
             return true;
         }
         return false;
@@ -80,7 +80,7 @@ public class FirestationServiceImpl implements FirestationService {
     @Override
     public boolean updateFirestation(Firestation firestation) {
         if (firestationRepository.findByAddress(firestation.getAddress()) != null) {
-            firestationRepository.updateFirestation(firestation);
+            firestationRepository.updateFirestationMapping(firestation);
             return true;
         }
         return false;
@@ -89,7 +89,7 @@ public class FirestationServiceImpl implements FirestationService {
     @Override
     public boolean deleteFirestationByAddress(String address) {
         if (firestationRepository.findByAddress(address) != null) {
-            firestationRepository.deleteFirestationByAddress(address);
+            firestationRepository.deleteFirestationMappingByAddress(address);
             return true;
         }
         return false;

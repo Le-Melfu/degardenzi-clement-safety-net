@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class AlertServiceImpl implements AlertService {
@@ -60,11 +61,11 @@ public class AlertServiceImpl implements AlertService {
 
     @Override
     public List<String> getPhoneNumbersByStation(String stationNumber) {
-        String address = firestationService.getStationAdress(stationNumber);
-        List<Person> persons = personService.getPersonsByAddress(address);
-
-        return persons.stream()
+        List<String> addresses = firestationService.getStationAdresses(stationNumber);
+        return addresses.stream()
+                .flatMap(address -> personService.getPersonsByAddress(address).stream())
                 .map(Person::getPhone)
+                .filter(Objects::nonNull)
                 .distinct()
                 .toList();
     }
@@ -96,31 +97,75 @@ public class AlertServiceImpl implements AlertService {
             );
         }).toList();
 
-        // 4. Retourner le DTO
         return new FireIncidentDTO(stationNumber, personsMedicalInfos);
     }
 
 
     @Override
-    public List<HouseholdWithMedicalDataDTO> getHouseholdWithMedicalByStations(List<String> stationNumber) {
-        /*
-         * pour chaque station passée en paramètre,
-         * retourner la liste des habitants desservis par cette station
-         * regroupés par adresse
-         * avec leurs infos médicales
-         * */
+    public List<StationFloodCoverageDTO> getStationsFloodCoverage(List<String> stationNumbers) {
+        List<StationFloodCoverageDTO> result = new ArrayList<>();
+
+        for (String stationNumber : stationNumbers) {
+            // Get adresses served by this station
+            List<String> addresses = firestationService.getStationAdresses(stationNumber);
+            List<HouseholdWithMedicalDataDTO> households = new ArrayList<>();
+
+            for (String address : addresses) {
+                List<Person> residents = personService.getPersonsByAddress(address);
+
+                // Get medical datas for each resident
+                List<PersonWithMedicalDataDTO> residentsDTO = residents.stream()
+                        .map(person -> {
+                            MedicalRecord record = medicalRecordService.getMedicalRecordByFullName(person.getFirstName(), person.getLastName());
+                            int age = medicalRecordService.calculateAge(record != null ? record.getBirthdate() : null);
+                            return new PersonWithMedicalDataDTO(
+                                    person.getFirstName(),
+                                    person.getLastName(),
+                                    person.getPhone(),
+                                    age,
+                                    record != null ? record.getMedications() : Collections.emptyList(),
+                                    record != null ? record.getAllergies() : Collections.emptyList()
+                            );
+                        })
+                        .toList();
+
+                households.add(new HouseholdWithMedicalDataDTO(address, residentsDTO));
+            }
+
+            result.add(new StationFloodCoverageDTO(stationNumber, households));
+        }
+
+        return result;
     }
 
 
     @Override
-    public Object getDetailedPersonInfo(String firstName, String lastName) {
-        // TODO
-        return null;
+    public List<PersonWithMedicalDataDTO> getPersonsInfosByLastName(String lastName) {
+        List<Person> allPersons = personService.getAllPersons();
+
+        return allPersons.stream()
+                .filter(p -> p.getLastName().equalsIgnoreCase(lastName))
+                .map(p -> {
+                    MedicalRecord record = medicalRecordService.getMedicalRecordByFullName(p.getFirstName(), p.getLastName());
+                    int age = medicalRecordService.calculateAge(record != null ? record.getBirthdate() : null);
+                    return new PersonWithMedicalDataDTO(
+                            p.getFirstName(),
+                            p.getLastName(),
+                            p.getPhone(),
+                            age,
+                            record != null ? record.getMedications() : Collections.emptyList(),
+                            record != null ? record.getAllergies() : Collections.emptyList()
+                    );
+                })
+                .toList();
     }
 
     @Override
     public List<String> getEmailsByCity(String city) {
-        // TODO
-        return List.of();
+        return personService.getAllPersons().stream()
+                .filter(p -> p.getCity().equalsIgnoreCase(city))
+                .map(Person::getEmail)
+                .distinct()
+                .toList();
     }
 }

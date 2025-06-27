@@ -29,9 +29,10 @@ public class JsonDataLoader {
             InputStream input = new ClassPathResource("data/data.json").getInputStream();
             Data data = mapper.readValue(input, Data.class);
 
-            personRepository.setData(data.getPersons());
-            firestationRepository.setData(data.getFirestations());
-            medicalRecordRepository.setData(data.getMedicalrecords());
+            FakeDatabase.setPersonData(data.getPersons());
+            FakeDatabase.setFirestationData(data.getFirestations());
+            FakeDatabase.setMedicalRecordData(data.getMedicalrecords());
+
 
             System.out.printf(
                     "[INIT] JSON data loaded successfully: %d persons, %d firestations, %d medical records.%n",
@@ -42,7 +43,7 @@ public class JsonDataLoader {
 
         } catch (Exception e) {
             System.err.println("[ERROR] Failed to load JSON data: " + e.getMessage());
-            e.printStackTrace();
+            // TODO LOG
         }
     }
 }
