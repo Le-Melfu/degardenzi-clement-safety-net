@@ -41,18 +41,13 @@ public class AlertServiceImpl implements AlertService {
         List<PersonPublicInfosDTO> otherMembers = new ArrayList<>();
 
         for (Person p : residents) {
-            try {
-                String birthdate = medicalRecordService.getBirthdate(p.getFirstName(), p.getLastName());
-                int age = medicalRecordService.calculateAge(birthdate);
+            String birthdate = medicalRecordService.getBirthdate(p.getFirstName(), p.getLastName());
+            int age = medicalRecordService.calculateAge(birthdate);
 
-                if (age <= 18) {
-                    children.add(new ChildDTO(p.getFirstName(), p.getLastName(), age));
-                } else {
-                    otherMembers.add(new PersonPublicInfosDTO(p.getFirstName(), p.getLastName(), p.getAddress(), p.getPhone()));
-                }
-
-            } catch (IllegalArgumentException e) {
-                // TODO: add log
+            if (age <= 18) {
+                children.add(new ChildDTO(p.getFirstName(), p.getLastName(), age));
+            } else {
+                otherMembers.add(new PersonPublicInfosDTO(p.getFirstName(), p.getLastName(), p.getAddress(), p.getPhone()));
             }
         }
 
@@ -74,6 +69,7 @@ public class AlertServiceImpl implements AlertService {
     public FireIncidentDTO getFireIncidentByAddress(String address) {
         FirestationMapping station = firestationService.getFirestationByAddress(address);
         if (station == null) {
+            //TODO add logger
             return null;
         }
         String stationNumber = station.getStation();
