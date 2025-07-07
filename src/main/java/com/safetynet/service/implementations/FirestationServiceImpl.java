@@ -55,7 +55,7 @@ public class FirestationServiceImpl implements FirestationService {
         int childCount = (int) persons.stream()
                 .filter(p -> {
                     String birthdate = medicalRecordService.getBirthdate(p.getFirstName(), p.getLastName());
-                    return medicalRecordService.calculateAge(birthdate) <= 18;
+                    return medicalRecordService.calculateAge(birthdate, p.getFirstName(), p.getLastName()) <= 18;
                 })
                 .count();
 

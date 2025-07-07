@@ -52,10 +52,10 @@ public class AlertServiceImplTest {
     @Test
     public void testGetChildrenByAddress() {
         when(personService.getPersonsByAddress("123 Street")).thenReturn(List.of(child, adult));
-        when(medicalRecordService.getBirthdate("Tim", "Doe")).thenReturn("2015-01-01");
-        when(medicalRecordService.getBirthdate("John", "Doe")).thenReturn("1980-01-01");
-        when(medicalRecordService.calculateAge("2015-01-01")).thenReturn(9);
-        when(medicalRecordService.calculateAge("1980-01-01")).thenReturn(44);
+        when(medicalRecordService.getBirthdate("Tim", "Doe")).thenReturn("2015/01/01");
+        when(medicalRecordService.getBirthdate("John", "Doe")).thenReturn("1980/01/01");
+        when(medicalRecordService.calculateAge("2015/01/01", "Tim", "Doe")).thenReturn(9);
+        when(medicalRecordService.calculateAge("1980/01/01", "John", "Doe")).thenReturn(44);
 
         ChildAlertDTO result = alertService.getChildrenByAddress("123 Street");
 
@@ -80,7 +80,7 @@ public class AlertServiceImplTest {
         when(firestationService.getFirestationByAddress("123 Street")).thenReturn(new FirestationMapping("123 Street", "2"));
         when(personService.getPersonsByAddress("123 Street")).thenReturn(List.of(child));
         when(medicalRecordService.getMedicalRecordByFullName("Tim", "Doe")).thenReturn(childRecord);
-        when(medicalRecordService.calculateAge("2015-01-01")).thenReturn(9);
+        when(medicalRecordService.calculateAge("2015-01-01", "test", "test")).thenReturn(9);
 
         FireIncidentDTO result = alertService.getFireIncidentByAddress("123 Street");
 
@@ -103,7 +103,7 @@ public class AlertServiceImplTest {
         when(firestationService.getStationAdresses("1")).thenReturn(List.of("123 Street"));
         when(personService.getPersonsByAddress("123 Street")).thenReturn(List.of(child));
         when(medicalRecordService.getMedicalRecordByFullName("Tim", "Doe")).thenReturn(childRecord);
-        when(medicalRecordService.calculateAge("2015-01-01")).thenReturn(9);
+        when(medicalRecordService.calculateAge("2015-01-01", "test", "test")).thenReturn(9);
 
         List<StationFloodCoverageDTO> result = alertService.getStationsFloodCoverage(List.of("1"));
 
@@ -116,7 +116,7 @@ public class AlertServiceImplTest {
     public void testGetPersonsInfosByLastName() {
         when(personService.getAllPersons()).thenReturn(List.of(child));
         when(medicalRecordService.getMedicalRecordByFullName("Tim", "Doe")).thenReturn(childRecord);
-        when(medicalRecordService.calculateAge("2015-01-01")).thenReturn(9);
+        when(medicalRecordService.calculateAge("2015-01-01", "test", "test")).thenReturn(9);
 
         List<PersonWithMedicalDataDTO> result = alertService.getPersonsInfosByLastName("Doe");
 

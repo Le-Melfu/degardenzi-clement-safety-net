@@ -3,6 +3,7 @@ package com.safetynet.service.implementations;
 import com.safetynet.model.MedicalRecord;
 import com.safetynet.repository.interfaces.MedicalRecordRepository;
 import com.safetynet.service.interfaces.MedicalRecordService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -10,6 +11,7 @@ import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+@Slf4j
 @Service
 public class MedicalRecordServiceImpl implements MedicalRecordService {
 
@@ -57,10 +59,9 @@ public class MedicalRecordServiceImpl implements MedicalRecordService {
     }
 
     @Override
-    public int calculateAge(String birthdate) {
+    public int calculateAge(String birthdate, String firstName, String lastName) {
         if (birthdate == null || birthdate.isBlank()) {
-            //TODO add logger
-            System.err.println("Birthdate is missing for this person");
+            log.info("Birthdate is missing for this person: {} {}", firstName, lastName);
             return 0;
         }
 
@@ -69,8 +70,7 @@ public class MedicalRecordServiceImpl implements MedicalRecordService {
             LocalDate birth = LocalDate.parse(birthdate, formatter);
             return Period.between(birth, LocalDate.now()).getYears();
         } catch (DateTimeParseException e) {
-            //TODO add logger
-            System.err.println("Unable to parse birthdate '" + birthdate + "': " + e.getMessage());
+            log.error("Unable to parse birthdate '{}' for user {} {}: {}", birthdate, firstName, lastName, e.getMessage());
             return 0;
         }
     }

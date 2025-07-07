@@ -7,11 +7,13 @@ import com.safetynet.repository.implementations.MedicalRecordInMemoryRepository;
 import com.safetynet.repository.implementations.PersonInMemoryRepository;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 
 import java.io.InputStream;
 
+@Slf4j
 @Component
 @RequiredArgsConstructor
 public class JsonDataLoader {
@@ -24,8 +26,6 @@ public class JsonDataLoader {
     @PostConstruct
     public void loadData() {
         try {
-            System.out.println("[INIT] Starting JSON data load...");
-
             ObjectMapper mapper = new ObjectMapper();
             InputStream input = new ClassPathResource("data/data.json").getInputStream();
             Data data = mapper.readValue(input, Data.class);
@@ -35,16 +35,9 @@ public class JsonDataLoader {
             fakeDatabase.setMedicalRecordData(data.getMedicalrecords());
 
 
-            System.out.printf(
-                    "[INIT] JSON data loaded successfully: %d persons, %d firestations, %d medical records.%n",
-                    data.getPersons().size(),
-                    data.getFirestationMappings().size(),
-                    data.getMedicalrecords().size()
-            );
-
+            log.info("[INIT] JSON data loaded successfully: %d persons, %d firestations, %d medical records.%n{}{}{}", data.getPersons().size(), data.getFirestationMappings().size(), data.getMedicalrecords().size());
         } catch (Exception e) {
-            System.err.println("[ERROR] Failed to load JSON data: " + e.getMessage());
-            // TODO LOG
+            log.error("[ERROR] Failed to load JSON data: {}", e.getMessage());
         }
     }
 }

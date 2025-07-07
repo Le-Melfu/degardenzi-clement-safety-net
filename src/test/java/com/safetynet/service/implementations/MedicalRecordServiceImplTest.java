@@ -60,25 +60,25 @@ class MedicalRecordServiceImplTest {
 
     @Test
     void testCalculateAge_validBirthdate() {
-        int age = medicalRecordService.calculateAge("01/01/1990");
+        int age = medicalRecordService.calculateAge("01/01/1990", "test", "test");
         assertTrue(age > 0);
     }
 
     @Test
     void testCalculateAge_nullBirthdate() {
-        int age = medicalRecordService.calculateAge(null);
+        int age = medicalRecordService.calculateAge(null, "test", "test");
         assertEquals(0, age);
     }
 
     @Test
     void testCalculateAge_blankBirthdate() {
-        int age = medicalRecordService.calculateAge("");
+        int age = medicalRecordService.calculateAge("", "test", "test");
         assertEquals(0, age);
     }
 
     @Test
     void testCalculateAge_invalidFormat() {
-        int age = medicalRecordService.calculateAge("ad/ad");
+        int age = medicalRecordService.calculateAge("ad/ad", "test", "test");
         assertEquals(0, age);
     }
 

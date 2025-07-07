@@ -13,6 +13,6 @@ public interface MedicalRecordService {
 
     boolean deleteMedicalRecord(String firstName, String lastName);
 
-    int calculateAge(String birthdate);
+    int calculateAge(String birthdate, String firstName, String lastName);
 
 }

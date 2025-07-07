@@ -69,8 +69,8 @@ class FirestationServiceImplTest {
         when(personService.getPersonsByAddress("1509 Culver St")).thenReturn(persons);
         when(medicalRecordService.getBirthdate("John", "Boyd")).thenReturn("03/06/1984");
         when(medicalRecordService.getBirthdate("Jacob", "Boyd")).thenReturn("03/06/2012");
-        when(medicalRecordService.calculateAge("03/06/1984")).thenReturn(40);
-        when(medicalRecordService.calculateAge("03/06/2012")).thenReturn(12);
+        when(medicalRecordService.calculateAge("03/06/1984", "John", "Boyd")).thenReturn(40);
+        when(medicalRecordService.calculateAge("03/06/2012", "Jacob", "Boyd")).thenReturn(12);
 
         FirestationCoverageDTO result = firestationService.getPersonsCoveredByStation("3");
 
