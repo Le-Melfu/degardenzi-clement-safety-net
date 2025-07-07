@@ -10,15 +10,21 @@ import java.util.List;
 @Repository
 public class PersonInMemoryRepository implements PersonRepository {
 
+    private final FakeDatabase fakeDatabase;
+
+    public PersonInMemoryRepository(FakeDatabase fakeDatabase) {
+        this.fakeDatabase = fakeDatabase;
+    }
+
 
     @Override
     public List<Person> getAll() {
-        return FakeDatabase.getPersons();
+        return fakeDatabase.getPersons();
     }
 
     @Override
     public Person findByFullName(String firstName, String lastName) {
-        List<Person> persons = FakeDatabase.getPersons();
+        List<Person> persons = fakeDatabase.getPersons();
         return persons.stream()
                 .filter(p -> p.getFirstName().equalsIgnoreCase(firstName)
                         && p.getLastName().equalsIgnoreCase(lastName))
@@ -28,7 +34,7 @@ public class PersonInMemoryRepository implements PersonRepository {
 
     @Override
     public List<Person> findByAddress(String address) {
-        List<Person> persons = FakeDatabase.getPersons();
+        List<Person> persons = fakeDatabase.getPersons();
         return persons.stream()
                 .filter(p -> p.getAddress().equalsIgnoreCase(address))
                 .toList();
@@ -36,7 +42,7 @@ public class PersonInMemoryRepository implements PersonRepository {
 
     @Override
     public void createNewPerson(Person person) {
-        List<Person> persons = FakeDatabase.getPersons();
+        List<Person> persons = fakeDatabase.getPersons();
         boolean exists = persons.stream()
                 .anyMatch(p -> p.getFirstName().equalsIgnoreCase(person.getFirstName())
                         && p.getLastName().equalsIgnoreCase(person.getLastName()));
@@ -47,7 +53,7 @@ public class PersonInMemoryRepository implements PersonRepository {
 
     @Override
     public void updatePerson(Person person) {
-        List<Person> persons = FakeDatabase.getPersons();
+        List<Person> persons = fakeDatabase.getPersons();
         for (int i = 0; i < persons.size(); i++) {
             Person existing = persons.get(i);
             if (existing.getFirstName().equalsIgnoreCase(person.getFirstName()) &&
@@ -60,7 +66,7 @@ public class PersonInMemoryRepository implements PersonRepository {
 
     @Override
     public void deletePersonByFullName(String firstName, String lastName) {
-        List<Person> persons = FakeDatabase.getPersons();
+        List<Person> persons = fakeDatabase.getPersons();
         persons.removeIf(p -> p.getFirstName().equalsIgnoreCase(firstName)
                 && p.getLastName().equalsIgnoreCase(lastName));
     }

@@ -1,24 +1,97 @@
 package com.safetynet.service.implementations;
 
+import com.safetynet.model.Person;
+import com.safetynet.repository.interfaces.PersonRepository;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.*;
+
 public class PersonServiceImplTest {
 
-    // TODO: test getAllPersons returns full list
+    @Mock
+    private PersonRepository personRepository;
 
-    // TODO: test getPersonsByAddress with matching address
-    // TODO: test getPersonsByAddress with no match
+    @InjectMocks
+    private PersonServiceImpl personService;
 
-    // TODO: test getEmailsByCity with matching city
-    // TODO: test getEmailsByCity with city and duplicate emails
+    private List<Person> mockPersons;
+    private Person person1;
+    private Person person2;
 
-    // TODO: test getPersonByFullName with existing person
-    // TODO: test getPersonByFullName with no match
+    @BeforeEach
+    public void setUp() {
+        MockitoAnnotations.openMocks(this);
 
-    // TODO: test createPerson with new person
-    // TODO: test createPerson with duplicate name
+        person1 = new Person("John", "Doe", "1509 Culver St", "Paris", "75000", "123-456-7890", "john@doe.com");
+        person2 = new Person("Jane", "Doe", "1509 Culver St", "Paris", "75000", "987-654-3210", "jane@doe.com");
 
-    // TODO: test updatePerson with existing name
-    // TODO: test updatePerson with unknown name
+        mockPersons = new ArrayList<>();
+        mockPersons.add(person1);
+        mockPersons.add(person2);
+    }
 
-    // TODO: test deletePerson with existing name
-    // TODO: test deletePerson with no match
+    @Test
+    public void testCreatePerson_success() {
+        Person newPerson = new Person("New", "Person", "1 Rue Test", "Paris", "75000", "555-0000", "new@person.com");
+        when(personRepository.getAll()).thenReturn(mockPersons);
+        boolean created = personService.addPerson(newPerson);
+
+        assertTrue(created);
+        verify(personRepository).createNewPerson(newPerson);
+    }
+
+    @Test
+    public void testCreatePerson_duplicate() {
+        Person duplicate = new Person("John", "Doe", "Diff Address", "Paris", "00000", "000-000-0000", "other@mail.com");
+        when(personRepository.findByFullName(anyString(), anyString())).thenReturn(duplicate);
+        boolean created = personService.addPerson(duplicate);
+
+        assertFalse(created);
+        verify(personRepository, never()).createNewPerson(any());
+    }
+
+    @Test
+    public void testUpdatePerson_found() {
+        Person updated = new Person("John", "Doe", "1509 Culver St", "Paris", "75000", "999-999-9999", "new@email.com");
+        when(personRepository.findByFullName(anyString(), anyString())).thenReturn(person1);
+        boolean updatedResult = personService.updatePerson(updated);
+
+        assertTrue(updatedResult);
+        verify(personRepository).updatePerson(updated);
+    }
+
+    @Test
+    public void testUpdatePerson_notFound() {
+        when(personRepository.findByFullName(anyString(), anyString())).thenReturn(null);
+        Person unknown = new Person("Ghost", "Guy", "N/A", "Nowhere", "00000", "000-000-0000", "ghost@guy.com");
+        boolean updated = personService.updatePerson(unknown);
+
+        assertFalse(updated);
+    }
+
+    @Test
+    public void testDeletePerson_found() {
+        when(personRepository.findByFullName(anyString(), anyString())).thenReturn(person2);
+        boolean deleted = personService.deletePerson("Jane", "Doe");
+
+        assertTrue(deleted);
+        verify(personRepository).deletePersonByFullName("Jane", "Doe");
+    }
+
+    @Test
+    public void testDeletePerson_notFound() {
+        when(personRepository.findByFullName(anyString(), anyString())).thenReturn(null);
+        boolean deleted = personService.deletePerson("Ghost", "Guy");
+
+        assertFalse(deleted);
+    }
 }

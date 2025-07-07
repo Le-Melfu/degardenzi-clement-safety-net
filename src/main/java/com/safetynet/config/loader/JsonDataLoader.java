@@ -16,6 +16,7 @@ import java.io.InputStream;
 @RequiredArgsConstructor
 public class JsonDataLoader {
 
+    private final FakeDatabase fakeDatabase;
     private final PersonInMemoryRepository personRepository;
     private final FirestationInMemoryRepository firestationRepository;
     private final MedicalRecordInMemoryRepository medicalRecordRepository;
@@ -29,9 +30,9 @@ public class JsonDataLoader {
             InputStream input = new ClassPathResource("data/data.json").getInputStream();
             Data data = mapper.readValue(input, Data.class);
 
-            FakeDatabase.setPersonData(data.getPersons());
-            FakeDatabase.setFirestationData(data.getFirestations());
-            FakeDatabase.setMedicalRecordData(data.getMedicalrecords());
+            fakeDatabase.setPersonData(data.getPersons());
+            fakeDatabase.setFirestationData(data.getFirestations());
+            fakeDatabase.setMedicalRecordData(data.getMedicalrecords());
 
 
             System.out.printf(

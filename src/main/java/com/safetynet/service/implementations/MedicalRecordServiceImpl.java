@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 @Service
 public class MedicalRecordServiceImpl implements MedicalRecordService {
@@ -58,11 +59,19 @@ public class MedicalRecordServiceImpl implements MedicalRecordService {
     @Override
     public int calculateAge(String birthdate) {
         if (birthdate == null || birthdate.isBlank()) {
-            throw new IllegalArgumentException("Birthdate is missing for this person");
+            //TODO add logger
+            System.err.println("Birthdate is missing for this person");
+            return 0;
         }
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
-        LocalDate birth = LocalDate.parse(birthdate, formatter);
-        return Period.between(birth, LocalDate.now()).getYears();
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+            LocalDate birth = LocalDate.parse(birthdate, formatter);
+            return Period.between(birth, LocalDate.now()).getYears();
+        } catch (DateTimeParseException e) {
+            //TODO add logger
+            System.err.println("Unable to parse birthdate '" + birthdate + "': " + e.getMessage());
+            return 0;
+        }
     }
 }

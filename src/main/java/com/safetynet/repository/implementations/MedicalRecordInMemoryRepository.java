@@ -10,9 +10,15 @@ import java.util.List;
 @Repository
 public class MedicalRecordInMemoryRepository implements MedicalRecordRepository {
 
+    private final FakeDatabase fakeDatabase;
+
+    public MedicalRecordInMemoryRepository(FakeDatabase fakeDatabase) {
+        this.fakeDatabase = fakeDatabase;
+    }
+
     @Override
     public MedicalRecord findByFullName(String firstName, String lastName) {
-        List<MedicalRecord> records = FakeDatabase.getMedicalrecords();
+        List<MedicalRecord> records = fakeDatabase.getMedicalrecords();
         return records.stream()
                 .filter(r -> r.getFirstName().equalsIgnoreCase(firstName)
                         && r.getLastName().equalsIgnoreCase(lastName))
@@ -28,7 +34,7 @@ public class MedicalRecordInMemoryRepository implements MedicalRecordRepository 
 
     @Override
     public void createNewMedicalRecord(MedicalRecord record) {
-        List<MedicalRecord> records = FakeDatabase.getMedicalrecords();
+        List<MedicalRecord> records = fakeDatabase.getMedicalrecords();
         boolean exists = records.stream()
                 .anyMatch(r -> r.getFirstName().equalsIgnoreCase(record.getFirstName())
                         && r.getLastName().equalsIgnoreCase(record.getLastName()));
@@ -39,7 +45,7 @@ public class MedicalRecordInMemoryRepository implements MedicalRecordRepository 
 
     @Override
     public void updateMedicalRecord(MedicalRecord record) {
-        List<MedicalRecord> records = FakeDatabase.getMedicalrecords();
+        List<MedicalRecord> records = fakeDatabase.getMedicalrecords();
         for (int i = 0; i < records.size(); i++) {
             MedicalRecord existing = records.get(i);
             if (existing.getFirstName().equalsIgnoreCase(record.getFirstName()) &&
@@ -52,7 +58,7 @@ public class MedicalRecordInMemoryRepository implements MedicalRecordRepository 
 
     @Override
     public void deleteMedicalRecordByFullName(String firstName, String lastName) {
-        List<MedicalRecord> records = FakeDatabase.getMedicalrecords();
+        List<MedicalRecord> records = fakeDatabase.getMedicalrecords();
         records.removeIf(r -> r.getFirstName().equalsIgnoreCase(firstName)
                 && r.getLastName().equalsIgnoreCase(lastName));
     }

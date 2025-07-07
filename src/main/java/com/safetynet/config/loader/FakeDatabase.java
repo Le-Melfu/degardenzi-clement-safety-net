@@ -10,25 +10,25 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 public class FakeDatabase {
     @Getter
-    public static List<Person> persons = new CopyOnWriteArrayList<>();
+    public List<Person> persons = new CopyOnWriteArrayList<>();
     @Getter
-    public static List<FirestationMapping> firestationMappings = new CopyOnWriteArrayList<>();
+    public List<FirestationMapping> firestationMappings = new CopyOnWriteArrayList<>();
     @Getter
-    public static List<MedicalRecord> medicalrecords = new CopyOnWriteArrayList<>();
+    public List<MedicalRecord> medicalrecords = new CopyOnWriteArrayList<>();
 
-    public static void setPersonData(List<Person> personsData) {
-        persons.clear();
-        persons.addAll(personsData);
+    public void setPersonData(List<Person> personsData) {
+        this.persons.clear();
+        this.persons.addAll(personsData);
     }
 
-    public static void setFirestationData(List<FirestationMapping> firestationsData) {
-        firestationMappings.clear();
-        firestationMappings.addAll(firestationsData);
+    public void setFirestationData(List<FirestationMapping> firestationsData) {
+        this.firestationMappings.clear();
+        this.firestationMappings.addAll(firestationsData);
     }
 
-    public static void setMedicalRecordData(List<MedicalRecord> medicalrecordsData) {
-        medicalrecords.clear();
-        medicalrecords.addAll(medicalrecordsData);
+    public void setMedicalRecordData(List<MedicalRecord> medicalrecordsData) {
+        this.medicalrecords.clear();
+        this.medicalrecords.addAll(medicalrecordsData);
     }
 }
 
