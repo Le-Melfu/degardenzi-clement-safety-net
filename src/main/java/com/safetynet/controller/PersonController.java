@@ -26,7 +26,7 @@ public class PersonController {
             description = "Creates a new person in the system. If the person already exists, the request will be ignored."
     )
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Person successfully created"),
+            @ApiResponse(responseCode = "201", description = "Person successfully created"),
             @ApiResponse(responseCode = "409", description = "Person already exists"),
             @ApiResponse(responseCode = "400", description = "Invalid request body")
     })
