@@ -35,7 +35,7 @@ public class JsonDataLoader {
             fakeDatabase.setMedicalRecordData(data.getMedicalrecords());
 
 
-            log.info("[INIT] JSON data loaded successfully: %d persons, %d firestations, %d medical records.%n{}{}{}", data.getPersons().size(), data.getFirestationMappings().size(), data.getMedicalrecords().size());
+            log.info("[INIT] JSON data loaded successfully: {} persons, {} firestations, {} medical records.", data.getPersons().size(), data.getFirestationMappings().size(), data.getMedicalrecords().size());
         } catch (Exception e) {
             log.error("[ERROR] Failed to load JSON data: {}", e.getMessage());
         }
