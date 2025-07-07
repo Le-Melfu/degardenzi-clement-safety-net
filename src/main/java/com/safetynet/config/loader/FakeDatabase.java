@@ -4,16 +4,16 @@ import com.safetynet.model.FirestationMapping;
 import com.safetynet.model.MedicalRecord;
 import com.safetynet.model.Person;
 import lombok.Getter;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+@Component
+@Getter
 public class FakeDatabase {
-    @Getter
     public List<Person> persons = new CopyOnWriteArrayList<>();
-    @Getter
     public List<FirestationMapping> firestationMappings = new CopyOnWriteArrayList<>();
-    @Getter
     public List<MedicalRecord> medicalrecords = new CopyOnWriteArrayList<>();
 
     public void setPersonData(List<Person> personsData) {
