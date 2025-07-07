@@ -31,14 +31,14 @@ public class JsonDataLoader {
             Data data = mapper.readValue(input, Data.class);
 
             fakeDatabase.setPersonData(data.getPersons());
-            fakeDatabase.setFirestationData(data.getFirestations());
+            fakeDatabase.setFirestationData(data.getFirestationMappings());
             fakeDatabase.setMedicalRecordData(data.getMedicalrecords());
 
 
             System.out.printf(
                     "[INIT] JSON data loaded successfully: %d persons, %d firestations, %d medical records.%n",
                     data.getPersons().size(),
-                    data.getFirestations().size(),
+                    data.getFirestationMappings().size(),
                     data.getMedicalrecords().size()
             );
 

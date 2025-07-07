@@ -2,9 +2,11 @@ package com.safetynet.model;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
 
 import java.util.List;
 
+@Getter
 public class Data {
     private final List<Person> persons;
     private final List<FirestationMapping> firestationMappings;
@@ -21,15 +23,4 @@ public class Data {
         this.medicalrecords = medicalrecords;
     }
 
-    public List<Person> getPersons() {
-        return persons;
-    }
-
-    public List<FirestationMapping> getFirestations() {
-        return firestationMappings;
-    }
-
-    public List<MedicalRecord> getMedicalrecords() {
-        return medicalrecords;
-    }
 }
