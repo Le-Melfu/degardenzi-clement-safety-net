@@ -39,6 +39,9 @@ public class FirestationServiceImpl implements FirestationService {
     @Override
     public FirestationCoverageDTO getPersonsCoveredByStation(String stationNumber) {
         List<String> stationAddresses = getStationAdresses(stationNumber);
+        if (stationAddresses.isEmpty()) {
+            return null;
+        }
         List<Person> persons = stationAddresses.stream()
                 .flatMap(address -> personService.getPersonsByAddress(address).stream())
                 .toList();

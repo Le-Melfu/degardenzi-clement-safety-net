@@ -42,6 +42,16 @@ class FirestationControllerTest {
     }
 
     @Test
+    void getCoverageByStationNotFound() throws Exception {
+        FirestationCoverageDTO dto = new FirestationCoverageDTO(List.of(), 2, 1);
+        when(firestationService.getPersonsCoveredByStation("1")).thenReturn(null);
+
+        mockMvc.perform(get("/firestation")
+                        .param("stationNumber", "1"))
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
     void createMapping() throws Exception {
         FirestationMapping mapping = new FirestationMapping("123 Main St", "2");
         when(firestationService.createNewFirestation(any())).thenReturn(true);

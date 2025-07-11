@@ -59,6 +59,9 @@ public class AlertServiceImpl implements AlertService {
     @Override
     public List<String> getPhoneNumbersByStation(String stationNumber) {
         List<String> addresses = firestationService.getStationAdresses(stationNumber);
+        if (addresses.isEmpty()) {
+            return null;
+        }
         return addresses.stream()
                 .flatMap(address -> personService.getPersonsByAddress(address).stream())
                 .map(Person::getPhone)
@@ -106,6 +109,9 @@ public class AlertServiceImpl implements AlertService {
         for (String stationNumber : stationNumbers) {
             // Get adresses served by this station
             List<String> addresses = firestationService.getStationAdresses(stationNumber);
+            if (addresses.isEmpty()) {
+                continue;
+            }
             List<HouseholdWithMedicalDataDTO> households = new ArrayList<>();
 
             for (String address : addresses) {

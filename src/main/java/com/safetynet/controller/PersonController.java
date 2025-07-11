@@ -5,6 +5,7 @@ import com.safetynet.service.interfaces.PersonService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,8 +32,7 @@ public class PersonController {
             @ApiResponse(responseCode = "400", description = "Invalid request body")
     })
     @PostMapping
-    public ResponseEntity<Void> createPerson(@RequestBody Person person) {
-
+    public ResponseEntity<Void> createPerson(@RequestBody @Valid Person person) {
         boolean created = personService.addPerson(person);
         if (!created) {
             return ResponseEntity.status(409).build();
