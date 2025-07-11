@@ -1,32 +1,30 @@
 package com.safetynet.config.loader;
 
-import com.safetynet.model.FirestationMapping;
-import com.safetynet.model.MedicalRecord;
-import com.safetynet.model.Person;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.safetynet.model.Data;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.TestPropertySource;
+import org.springframework.core.io.ClassPathResource;
 
-import java.util.List;
+import java.io.InputStream;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-@SpringBootTest
-@TestPropertySource(properties = "spring.main.allow-bean-definition-overriding=true")
 public class JsonDataLoaderTest {
 
-    @Autowired
-    private FakeDatabase fakeDatabase;
-
     @Test
-    public void testLoadData() {
-        List<Person> persons = fakeDatabase.getPersons();
-        List<FirestationMapping> stations = fakeDatabase.getFirestationMappings();
-        List<MedicalRecord> records = fakeDatabase.getMedicalrecords();
+    public void testLoadData() throws Exception {
+        ObjectMapper mapper = new ObjectMapper();
+        InputStream input = new ClassPathResource("data/data.json").getInputStream();
+        Data data = mapper.readValue(input, Data.class);
 
-        assertFalse(persons.isEmpty(), "Persons should be loaded");
-        assertFalse(stations.isEmpty(), "Stations should be loaded");
-        assertFalse(records.isEmpty(), "MedicalRecords should be loaded");
+        assertNotNull(data.getPersons());
+        assertFalse(data.getPersons().isEmpty(), "Persons should be loaded");
+
+        assertNotNull(data.getFirestationMappings());
+        assertFalse(data.getFirestationMappings().isEmpty(), "Firestations should be loaded");
+
+        assertNotNull(data.getMedicalrecords());
+        assertFalse(data.getMedicalrecords().isEmpty(), "MedicalRecords should be loaded");
     }
 }

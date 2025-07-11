@@ -1,6 +1,8 @@
 package com.safetynet.repository.implementations;
 
 import com.safetynet.config.loader.FakeDatabase;
+import com.safetynet.config.loader.JsonDataWriter;
+import com.safetynet.model.Data;
 import com.safetynet.model.MedicalRecord;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -8,6 +10,9 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.mock;
 
 public class MedicalRecordInMemoryRepositoryTest {
 
@@ -16,7 +21,10 @@ public class MedicalRecordInMemoryRepositoryTest {
 
     @BeforeEach
     public void setUp() {
-        fakeDatabase = new FakeDatabase();
+        JsonDataWriter jsonDataWriter = mock(JsonDataWriter.class);
+        doNothing().when(jsonDataWriter).saveData(any(Data.class));
+
+        fakeDatabase = new FakeDatabase(jsonDataWriter);
         medicalRecordRepository = new MedicalRecordInMemoryRepository(fakeDatabase);
 
         fakeDatabase.setMedicalRecordData(List.of(

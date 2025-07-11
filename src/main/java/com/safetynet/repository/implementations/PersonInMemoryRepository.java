@@ -5,6 +5,7 @@ import com.safetynet.model.Person;
 import com.safetynet.repository.interfaces.PersonRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -16,7 +17,6 @@ public class PersonInMemoryRepository implements PersonRepository {
         this.fakeDatabase = fakeDatabase;
     }
 
-
     @Override
     public List<Person> getAll() {
         return fakeDatabase.getPersons();
@@ -24,8 +24,7 @@ public class PersonInMemoryRepository implements PersonRepository {
 
     @Override
     public Person findByFullName(String firstName, String lastName) {
-        List<Person> persons = fakeDatabase.getPersons();
-        return persons.stream()
+        return fakeDatabase.getPersons().stream()
                 .filter(p -> p.getFirstName().equalsIgnoreCase(firstName)
                         && p.getLastName().equalsIgnoreCase(lastName))
                 .findFirst()
@@ -34,40 +33,50 @@ public class PersonInMemoryRepository implements PersonRepository {
 
     @Override
     public List<Person> findByAddress(String address) {
-        List<Person> persons = fakeDatabase.getPersons();
-        return persons.stream()
+        return fakeDatabase.getPersons().stream()
                 .filter(p -> p.getAddress().equalsIgnoreCase(address))
                 .toList();
     }
 
     @Override
     public void createNewPerson(Person person) {
-        List<Person> persons = fakeDatabase.getPersons();
-        boolean exists = persons.stream()
+        List<Person> current = new ArrayList<>(fakeDatabase.getPersons());
+        boolean exists = current.stream()
                 .anyMatch(p -> p.getFirstName().equalsIgnoreCase(person.getFirstName())
                         && p.getLastName().equalsIgnoreCase(person.getLastName()));
         if (!exists) {
-            persons.add(person);
+            current.add(person);
+            fakeDatabase.writePersonsData(current);
         }
     }
 
     @Override
     public void updatePerson(Person person) {
-        List<Person> persons = fakeDatabase.getPersons();
-        for (int i = 0; i < persons.size(); i++) {
-            Person existing = persons.get(i);
+        List<Person> current = new ArrayList<>(fakeDatabase.getPersons());
+        boolean updated = false;
+
+        for (int i = 0; i < current.size(); i++) {
+            Person existing = current.get(i);
             if (existing.getFirstName().equalsIgnoreCase(person.getFirstName()) &&
                     existing.getLastName().equalsIgnoreCase(person.getLastName())) {
-                persons.set(i, person);
-                return;
+                current.set(i, person);
+                updated = true;
+                break;
             }
+        }
+
+        if (updated) {
+            fakeDatabase.writePersonsData(current);
         }
     }
 
     @Override
     public void deletePersonByFullName(String firstName, String lastName) {
-        List<Person> persons = fakeDatabase.getPersons();
-        persons.removeIf(p -> p.getFirstName().equalsIgnoreCase(firstName)
+        List<Person> current = new ArrayList<>(fakeDatabase.getPersons());
+        boolean removed = current.removeIf(p -> p.getFirstName().equalsIgnoreCase(firstName)
                 && p.getLastName().equalsIgnoreCase(lastName));
+        if (removed) {
+            fakeDatabase.writePersonsData(current);
+        }
     }
 }

@@ -26,6 +26,7 @@ public class JsonDataLoader {
     @PostConstruct
     public void loadData() {
         try {
+            log.info("[INIT] Loading data from JSON");
             ObjectMapper mapper = new ObjectMapper();
             InputStream input = new ClassPathResource("data/data.json").getInputStream();
             Data data = mapper.readValue(input, Data.class);
@@ -40,11 +41,4 @@ public class JsonDataLoader {
             log.error("[ERROR] Failed to load JSON data: {}", e.getMessage());
         }
     }
-
-//    public void saveData(DataTosave){
-//        ObjectMapper mapper = new ObjectMapper();
-//        InputStream input = new ClassPathResource("data/data.json").getInputStream();
-//            Ecrire la valeur dans le fichier
-//        Data data = mapper.readValue(input, Data.class);
-//    }
 }

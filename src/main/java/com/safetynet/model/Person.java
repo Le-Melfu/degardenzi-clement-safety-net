@@ -8,6 +8,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor(force = true)
 public class Person {
+    // TODO Use validation using jakarta constraints
     private final String firstName;
     private final String lastName;
     private final String address;
