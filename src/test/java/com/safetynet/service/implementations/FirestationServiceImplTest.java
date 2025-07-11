@@ -45,7 +45,7 @@ class FirestationServiceImplTest {
     }
 
     @Test
-    void testGetFirestationByAddress_found() {
+    void testGetFirestationByAddress() {
         when(firestationRepository.findByAddress("1509 Culver St")).thenReturn(mapping);
         FirestationMapping result = firestationService.getFirestationByAddress("1509 Culver St");
         assertNotNull(result);
@@ -53,7 +53,7 @@ class FirestationServiceImplTest {
     }
 
     @Test
-    void testGetStationAddresses_found() {
+    void testGetStationAddresses() {
         List<String> addresses = List.of("1509 Culver St", "29 15th St");
         when(firestationRepository.getStationAdresses("3")).thenReturn(addresses);
         List<String> result = firestationService.getStationAdresses("3");
@@ -80,7 +80,7 @@ class FirestationServiceImplTest {
     }
 
     @Test
-    void testCreateNewFirestation_new() {
+    void testCreateNewFirestation() {
         when(firestationRepository.findAll()).thenReturn(Collections.emptyList());
         boolean result = firestationService.createNewFirestation(mapping);
         assertTrue(result);
@@ -88,7 +88,7 @@ class FirestationServiceImplTest {
     }
 
     @Test
-    void testCreateNewFirestation_duplicate() {
+    void testCreateNewFirestationDuplicate() {
         when(firestationRepository.findAll()).thenReturn(List.of(mapping));
         boolean result = firestationService.createNewFirestation(mapping);
         assertFalse(result);
@@ -96,7 +96,7 @@ class FirestationServiceImplTest {
     }
 
     @Test
-    void testUpdateFirestation_existing() {
+    void testUpdateFirestation() {
         when(firestationRepository.findByAddress("1509 Culver St")).thenReturn(mapping);
         FirestationMapping updated = new FirestationMapping("1509 Culver St", "4");
         boolean result = firestationService.updateFirestation(updated);
@@ -105,7 +105,7 @@ class FirestationServiceImplTest {
     }
 
     @Test
-    void testUpdateFirestation_notFound() {
+    void testUpdateFirestationNotFound() {
         when(firestationRepository.findByAddress("Unknown Address")).thenReturn(null);
         FirestationMapping updated = new FirestationMapping("Unknown Address", "4");
         boolean result = firestationService.updateFirestation(updated);
@@ -114,7 +114,7 @@ class FirestationServiceImplTest {
     }
 
     @Test
-    void testDeleteFirestationByAddress_existing() {
+    void testDeleteFirestationByAddress() {
         when(firestationRepository.findByAddress("1509 Culver St")).thenReturn(mapping);
         boolean result = firestationService.deleteFirestationByAddress("1509 Culver St");
         assertTrue(result);
@@ -122,7 +122,7 @@ class FirestationServiceImplTest {
     }
 
     @Test
-    void testDeleteFirestationByAddress_notFound() {
+    void testDeleteFirestationByAddressNotFound() {
         when(firestationRepository.findByAddress("Unknown Address")).thenReturn(null);
         boolean result = firestationService.deleteFirestationByAddress("Unknown Address");
         assertFalse(result);

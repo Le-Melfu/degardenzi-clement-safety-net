@@ -36,7 +36,7 @@ class MedicalRecordControllerTest {
     );
 
     @Test
-    void createMedicalRecord_shouldReturn201_whenCreated() throws Exception {
+    void createMedicalRecord() throws Exception {
         when(medicalRecordService.addMedicalRecord(any())).thenReturn(true);
 
         mockMvc.perform(post("/medicalRecord")
@@ -46,7 +46,7 @@ class MedicalRecordControllerTest {
     }
 
     @Test
-    void createMedicalRecord_shouldReturn409_whenExists() throws Exception {
+    void createMedicalRecordAlreadyExists() throws Exception {
         when(medicalRecordService.addMedicalRecord(any())).thenReturn(false);
 
         mockMvc.perform(post("/medicalRecord")
@@ -56,7 +56,7 @@ class MedicalRecordControllerTest {
     }
 
     @Test
-    void updateMedicalRecord_shouldReturn200_whenUpdated() throws Exception {
+    void updateMedicalRecord() throws Exception {
         when(medicalRecordService.updateMedicalRecord(any())).thenReturn(true);
 
         mockMvc.perform(put("/medicalRecord")
@@ -66,7 +66,7 @@ class MedicalRecordControllerTest {
     }
 
     @Test
-    void updateMedicalRecord_shouldReturn404_whenNotFound() throws Exception {
+    void updateMedicalRecordNotFound() throws Exception {
         when(medicalRecordService.updateMedicalRecord(any())).thenReturn(false);
 
         mockMvc.perform(put("/medicalRecord")
@@ -76,7 +76,7 @@ class MedicalRecordControllerTest {
     }
 
     @Test
-    void deleteMedicalRecord_shouldReturn204_whenDeleted() throws Exception {
+    void deleteMedicalRecord() throws Exception {
         when(medicalRecordService.deleteMedicalRecord("John", "Doe")).thenReturn(true);
 
         mockMvc.perform(delete("/medicalRecord")
@@ -86,7 +86,7 @@ class MedicalRecordControllerTest {
     }
 
     @Test
-    void deleteMedicalRecord_shouldReturn404_whenNotFound() throws Exception {
+    void deleteMedicalRecordNotFound() throws Exception {
         when(medicalRecordService.deleteMedicalRecord("Ghost", "Guy")).thenReturn(false);
 
         mockMvc.perform(delete("/medicalRecord")

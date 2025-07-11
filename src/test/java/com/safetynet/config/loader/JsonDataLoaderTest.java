@@ -20,7 +20,7 @@ public class JsonDataLoaderTest {
     private FakeDatabase fakeDatabase;
 
     @Test
-    public void testLoadData_shouldPopulateDatabase() {
+    public void testLoadData() {
         List<Person> persons = fakeDatabase.getPersons();
         List<FirestationMapping> stations = fakeDatabase.getFirestationMappings();
         List<MedicalRecord> records = fakeDatabase.getMedicalrecords();

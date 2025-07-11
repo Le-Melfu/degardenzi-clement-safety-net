@@ -29,7 +29,7 @@ class PersonControllerTest {
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     @Test
-    void createPerson_shouldReturn200_whenSuccess() throws Exception {
+    void createPerson() throws Exception {
         Person newPerson = new Person("Jane", "Doe", "...", "...", "...", "...", "jane@doe.com");
         when(personService.addPerson(any())).thenReturn(true);
 
@@ -40,7 +40,7 @@ class PersonControllerTest {
     }
 
     @Test
-    void createPerson_shouldReturn409_whenAlreadyExists() throws Exception {
+    void createPersonAlreadyExists() throws Exception {
         Person newPerson = new Person("Jane", "Doe", "...", "...", "...", "...", "jane@doe.com");
         when(personService.addPerson(any())).thenReturn(false);
 
@@ -51,7 +51,7 @@ class PersonControllerTest {
     }
 
     @Test
-    void updatePerson_shouldReturn200_whenUpdated() throws Exception {
+    void updatePerson() throws Exception {
         Person updated = new Person("John", "Doe", "...", "...", "...", "...", "john@doe.com");
         when(personService.updatePerson(any())).thenReturn(true);
 
@@ -62,7 +62,7 @@ class PersonControllerTest {
     }
 
     @Test
-    void updatePerson_shouldReturn404_whenNotFound() throws Exception {
+    void updatePersonNotFound() throws Exception {
         Person updated = new Person("Ghost", "User", "...", "...", "...", "...", "ghost@mail.com");
         when(personService.updatePerson(any())).thenReturn(false);
 
@@ -73,7 +73,7 @@ class PersonControllerTest {
     }
 
     @Test
-    void deletePerson_shouldReturn204_whenDeleted() throws Exception {
+    void deletePerson() throws Exception {
         when(personService.deletePerson("John", "Doe")).thenReturn(true);
 
         mockMvc.perform(delete("/person")
@@ -83,7 +83,7 @@ class PersonControllerTest {
     }
 
     @Test
-    void deletePerson_shouldReturn404_whenNotFound() throws Exception {
+    void deletePersonNotFound() throws Exception {
         when(personService.deletePerson("Ghost", "User")).thenReturn(false);
 
         mockMvc.perform(delete("/person")

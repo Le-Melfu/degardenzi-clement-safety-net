@@ -30,7 +30,7 @@ class AlertControllerTest {
     private AlertService alertService;
 
     @Test
-    void getChildrenByAddress_shouldReturnDTO() throws Exception {
+    void getChildrenByAddress() throws Exception {
         ChildAlertDTO dto = new ChildAlertDTO(List.of(), List.of());
         when(alertService.getChildrenByAddress("TestAddress")).thenReturn(dto);
 
@@ -40,7 +40,7 @@ class AlertControllerTest {
     }
 
     @Test
-    void getPhoneNumbersByStation_shouldReturnPhones() throws Exception {
+    void getPhoneNumbersByStation() throws Exception {
         when(alertService.getPhoneNumbersByStation("1")).thenReturn(List.of("1234567890"));
 
         mockMvc.perform(get("/phoneAlert?stationNumber=1"))
@@ -49,7 +49,7 @@ class AlertControllerTest {
     }
 
     @Test
-    void getPhoneNumbersByStation_shouldReturnNoContent() throws Exception {
+    void getPhoneNumbersByStationEmpty() throws Exception {
         when(alertService.getPhoneNumbersByStation("99")).thenReturn(List.of());
 
         mockMvc.perform(get("/phoneAlert?stationNumber=99"))
@@ -57,7 +57,7 @@ class AlertControllerTest {
     }
 
     @Test
-    void getFireIncident_shouldReturnDTO() throws Exception {
+    void getFireIncident() throws Exception {
         FireIncidentDTO dto = new FireIncidentDTO("1", List.of());
         when(alertService.getFireIncidentByAddress("TestAddress")).thenReturn(dto);
 
@@ -67,7 +67,7 @@ class AlertControllerTest {
     }
 
     @Test
-    void getFireIncident_shouldReturnNotFound() throws Exception {
+    void getFireIncidentNotFound() throws Exception {
         when(alertService.getFireIncidentByAddress("Unknown")).thenReturn(null);
 
         mockMvc.perform(get("/fire?address=Unknown"))
@@ -75,7 +75,7 @@ class AlertControllerTest {
     }
 
     @Test
-    void getFloodCoverage_shouldReturnData() throws Exception {
+    void getFloodCoverage() throws Exception {
         when(alertService.getStationsFloodCoverage(List.of("1"))).thenReturn(List.of(new StationFloodCoverageDTO("1", List.of())));
 
         mockMvc.perform(get("/flood/stations?stations=1"))
@@ -84,13 +84,13 @@ class AlertControllerTest {
     }
 
     @Test
-    void getFloodCoverage_shouldReturnBadRequest() throws Exception {
+    void getFloodCoverageBadRequest() throws Exception {
         mockMvc.perform(get("/flood/stations?stations="))
                 .andExpect(status().isBadRequest());
     }
 
     @Test
-    void getPersonInfosByLastName_shouldReturnList() throws Exception {
+    void getPersonInfosByLastName() throws Exception {
         when(alertService.getPersonsInfosByLastName("Doe"))
                 .thenReturn(List.of(new PersonWithMedicalDataDTO("John", "Doe", "12345", 30, List.of(), List.of())));
 
@@ -100,7 +100,7 @@ class AlertControllerTest {
     }
 
     @Test
-    void getPersonInfosByLastName_shouldReturnNotFound() throws Exception {
+    void getPersonInfosByLastNameNotFound() throws Exception {
         when(alertService.getPersonsInfosByLastName("Ghost")).thenReturn(List.of());
 
         mockMvc.perform(get("/personInfosLastName?lastName=Ghost"))
@@ -108,7 +108,7 @@ class AlertControllerTest {
     }
 
     @Test
-    void getEmailsByCity_shouldReturnList() throws Exception {
+    void getEmailsByCity() throws Exception {
         when(alertService.getEmailsByCity("Culver")).thenReturn(List.of("a@b.com"));
 
         mockMvc.perform(get("/communityEmail?city=Culver"))
@@ -117,7 +117,7 @@ class AlertControllerTest {
     }
 
     @Test
-    void getEmailsByCity_shouldReturnBadRequest() throws Exception {
+    void getEmailsByCityBadRequest() throws Exception {
         mockMvc.perform(get("/communityEmail?city="))
                 .andExpect(status().isBadRequest());
     }

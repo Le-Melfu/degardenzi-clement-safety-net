@@ -32,7 +32,7 @@ class FirestationControllerTest {
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     @Test
-    void getCoverageByStation_shouldReturn200() throws Exception {
+    void getCoverageByStation() throws Exception {
         FirestationCoverageDTO dto = new FirestationCoverageDTO(List.of(), 2, 1);
         when(firestationService.getPersonsCoveredByStation("1")).thenReturn(dto);
 
@@ -42,7 +42,7 @@ class FirestationControllerTest {
     }
 
     @Test
-    void createMapping_shouldReturn201_whenCreated() throws Exception {
+    void createMapping() throws Exception {
         FirestationMapping mapping = new FirestationMapping("123 Main St", "2");
         when(firestationService.createNewFirestation(any())).thenReturn(true);
 
@@ -53,7 +53,7 @@ class FirestationControllerTest {
     }
 
     @Test
-    void createMapping_shouldReturn409_whenConflict() throws Exception {
+    void createMappingConflict() throws Exception {
         FirestationMapping mapping = new FirestationMapping("123 Main St", "2");
         when(firestationService.createNewFirestation(any())).thenReturn(false);
 
@@ -64,7 +64,7 @@ class FirestationControllerTest {
     }
 
     @Test
-    void updateMapping_shouldReturn200_whenUpdated() throws Exception {
+    void updateMapping() throws Exception {
         FirestationMapping mapping = new FirestationMapping("123 Main St", "3");
         when(firestationService.updateFirestation(any())).thenReturn(true);
 
@@ -75,7 +75,7 @@ class FirestationControllerTest {
     }
 
     @Test
-    void updateMapping_shouldReturn404_whenNotFound() throws Exception {
+    void updateMappingNotFound() throws Exception {
         FirestationMapping mapping = new FirestationMapping("Ghost St", "3");
         when(firestationService.updateFirestation(any())).thenReturn(false);
 
@@ -86,7 +86,7 @@ class FirestationControllerTest {
     }
 
     @Test
-    void deleteMapping_shouldReturn204_whenDeleted() throws Exception {
+    void deleteMapping() throws Exception {
         when(firestationService.deleteFirestationByAddress("123 Main St")).thenReturn(true);
 
         mockMvc.perform(delete("/firestation")
@@ -95,7 +95,7 @@ class FirestationControllerTest {
     }
 
     @Test
-    void deleteMapping_shouldReturn404_whenNotFound() throws Exception {
+    void deleteMappingNotFound() throws Exception {
         when(firestationService.deleteFirestationByAddress("Ghost St")).thenReturn(false);
 
         mockMvc.perform(delete("/firestation")

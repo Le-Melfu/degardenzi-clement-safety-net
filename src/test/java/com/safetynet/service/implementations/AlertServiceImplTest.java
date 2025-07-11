@@ -90,7 +90,7 @@ public class AlertServiceImplTest {
     }
 
     @Test
-    public void testGetFireIncidentByAddress_noStation() {
+    public void testGetFireIncidentByAddressNoStation() {
         when(firestationService.getFirestationByAddress("123 Street")).thenReturn(null);
         FireIncidentDTO result = alertService.getFireIncidentByAddress("123 Street");
 

@@ -26,32 +26,32 @@ public class MedicalRecordInMemoryRepositoryTest {
     }
 
     @Test
-    public void testFindByFullName_found() {
+    public void testFindByFullName() {
         MedicalRecord record = medicalRecordRepository.findByFullName("John", "Doe");
         assertNotNull(record);
         assertEquals("01/01/1990", record.getBirthdate());
     }
 
     @Test
-    public void testFindByFullName_notFound() {
+    public void testFindByFullNameNotFound() {
         MedicalRecord record = medicalRecordRepository.findByFullName("Ghost", "Guy");
         assertNull(record);
     }
 
     @Test
-    public void testGetBirthdateByFullName_found() {
+    public void testGetBirthdateByFullName() {
         String birthdate = medicalRecordRepository.getBirthdateByFullName("Jane", "Doe");
         assertEquals("02/02/1985", birthdate);
     }
 
     @Test
-    public void testGetBirthdateByFullName_notFound() {
+    public void testGetBirthdateByFullNameNotFound() {
         String birthdate = medicalRecordRepository.getBirthdateByFullName("Foo", "Bar");
         assertNull(birthdate);
     }
 
     @Test
-    public void testCreateNewMedicalRecord_success() {
+    public void testCreateNewMedicalRecord() {
         MedicalRecord newRecord = new MedicalRecord("New", "Person", "03/03/2000", List.of("med3:300mg"), List.of("dust"));
         medicalRecordRepository.createNewMedicalRecord(newRecord);
 
@@ -61,7 +61,7 @@ public class MedicalRecordInMemoryRepositoryTest {
     }
 
     @Test
-    public void testCreateNewMedicalRecord_duplicate() {
+    public void testCreateNewMedicalRecordDuplicate() {
         MedicalRecord duplicate = new MedicalRecord("John", "Doe", "04/04/1999", List.of("med4:400mg"), List.of("latex"));
         medicalRecordRepository.createNewMedicalRecord(duplicate);
 
@@ -70,7 +70,7 @@ public class MedicalRecordInMemoryRepositoryTest {
     }
 
     @Test
-    public void testUpdateMedicalRecord_found() {
+    public void testUpdateMedicalRecord() {
         MedicalRecord updated = new MedicalRecord("Jane", "Doe", "05/05/1980", List.of("newmed"), List.of("none"));
         medicalRecordRepository.updateMedicalRecord(updated);
 
@@ -81,7 +81,7 @@ public class MedicalRecordInMemoryRepositoryTest {
     }
 
     @Test
-    public void testUpdateMedicalRecord_notFound() {
+    public void testUpdateMedicalRecordNotFound() {
         MedicalRecord ghost = new MedicalRecord("Ghost", "Guy", "06/06/1970", List.of("ghostmed"), List.of("ghostallergy"));
         medicalRecordRepository.updateMedicalRecord(ghost);
 
@@ -89,14 +89,14 @@ public class MedicalRecordInMemoryRepositoryTest {
     }
 
     @Test
-    public void testDeleteMedicalRecordByFullName_found() {
+    public void testDeleteMedicalRecordByFullName() {
         medicalRecordRepository.deleteMedicalRecordByFullName("John", "Doe");
 
         assertNull(medicalRecordRepository.findByFullName("John", "Doe"));
     }
 
     @Test
-    public void testDeleteMedicalRecordByFullName_notFound() {
+    public void testDeleteMedicalRecordByFullNameNotFound() {
         medicalRecordRepository.deleteMedicalRecordByFullName("Ghost", "Guy");
 
         List<MedicalRecord> all = fakeDatabase.getMedicalrecords();

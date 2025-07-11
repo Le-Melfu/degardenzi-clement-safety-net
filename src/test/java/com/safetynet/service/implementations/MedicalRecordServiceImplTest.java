@@ -40,7 +40,7 @@ class MedicalRecordServiceImplTest {
     }
 
     @Test
-    void testGetMedicalRecordByFullName_match() {
+    void testGetMedicalRecordByFullName() {
         when(medicalRecordRepository.findByFullName("John", "Doe")).thenReturn(record);
 
         MedicalRecord result = medicalRecordService.getMedicalRecordByFullName("John", "Doe");
@@ -50,7 +50,7 @@ class MedicalRecordServiceImplTest {
     }
 
     @Test
-    void testGetMedicalRecordByFullName_noMatch() {
+    void testGetMedicalRecordByFullNameNoMatch() {
         when(medicalRecordRepository.findByFullName("Jane", "Smith")).thenReturn(null);
 
         MedicalRecord result = medicalRecordService.getMedicalRecordByFullName("Jane", "Smith");
@@ -59,31 +59,31 @@ class MedicalRecordServiceImplTest {
     }
 
     @Test
-    void testCalculateAge_validBirthdate() {
+    void testCalculateAgeValidBirthdate() {
         int age = medicalRecordService.calculateAge("01/01/1990", "test", "test");
         assertTrue(age > 0);
     }
 
     @Test
-    void testCalculateAge_nullBirthdate() {
+    void testCalculateAgeNullBirthdate() {
         int age = medicalRecordService.calculateAge(null, "test", "test");
         assertEquals(0, age);
     }
 
     @Test
-    void testCalculateAge_blankBirthdate() {
+    void testCalculateAgeBlankBirthdate() {
         int age = medicalRecordService.calculateAge("", "test", "test");
         assertEquals(0, age);
     }
 
     @Test
-    void testCalculateAge_invalidFormat() {
+    void testCalculateAgeInvalidFormat() {
         int age = medicalRecordService.calculateAge("ad/ad", "test", "test");
         assertEquals(0, age);
     }
 
     @Test
-    void testCreateMedicalRecord_newPerson() {
+    void testCreateMedicalRecord() {
         when(medicalRecordRepository.findByFullName("John", "Doe")).thenReturn(null);
 
         boolean result = medicalRecordService.addMedicalRecord(record);
@@ -93,7 +93,7 @@ class MedicalRecordServiceImplTest {
     }
 
     @Test
-    void testCreateMedicalRecord_duplicate() {
+    void testCreateMedicalRecordDuplicate() {
         when(medicalRecordRepository.findByFullName("John", "Doe")).thenReturn(record);
 
         boolean result = medicalRecordService.addMedicalRecord(record);
@@ -103,7 +103,7 @@ class MedicalRecordServiceImplTest {
     }
 
     @Test
-    void testUpdateMedicalRecord_existingPerson() {
+    void testUpdateMedicalRecord() {
         when(medicalRecordRepository.findByFullName("John", "Doe")).thenReturn(record);
 
         MedicalRecord updated = new MedicalRecord("John", "Doe", "01/01/1990", Collections.emptyList(), Collections.emptyList());
@@ -114,7 +114,7 @@ class MedicalRecordServiceImplTest {
     }
 
     @Test
-    void testUpdateMedicalRecord_unknownPerson() {
+    void testUpdateMedicalRecordNotFound() {
         when(medicalRecordRepository.findByFullName("Jane", "Doe")).thenReturn(null);
 
         MedicalRecord updated = new MedicalRecord("Jane", "Doe", "01/01/1990", Collections.emptyList(), Collections.emptyList());
@@ -125,7 +125,7 @@ class MedicalRecordServiceImplTest {
     }
 
     @Test
-    void testDeleteMedicalRecord_existingPerson() {
+    void testDeleteMedicalRecord() {
         when(medicalRecordRepository.findByFullName("John", "Doe")).thenReturn(record);
 
         boolean result = medicalRecordService.deleteMedicalRecord("John", "Doe");
@@ -135,7 +135,7 @@ class MedicalRecordServiceImplTest {
     }
 
     @Test
-    void testDeleteMedicalRecord_unknownPerson() {
+    void testDeleteMedicalRecordNotFound() {
         when(medicalRecordRepository.findByFullName("Jane", "Doe")).thenReturn(null);
 
         boolean result = medicalRecordService.deleteMedicalRecord("Jane", "Doe");

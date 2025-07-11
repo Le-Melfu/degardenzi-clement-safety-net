@@ -40,7 +40,7 @@ public class PersonServiceImplTest {
     }
 
     @Test
-    public void testCreatePerson_success() {
+    public void testCreatePerson() {
         Person newPerson = new Person("New", "Person", "1 Rue Test", "Paris", "75000", "555-0000", "new@person.com");
         when(personRepository.getAll()).thenReturn(mockPersons);
         boolean created = personService.addPerson(newPerson);
@@ -50,7 +50,7 @@ public class PersonServiceImplTest {
     }
 
     @Test
-    public void testCreatePerson_duplicate() {
+    public void testCreatePersonDuplicate() {
         Person duplicate = new Person("John", "Doe", "Diff Address", "Paris", "00000", "000-000-0000", "other@mail.com");
         when(personRepository.findByFullName(anyString(), anyString())).thenReturn(duplicate);
         boolean created = personService.addPerson(duplicate);
@@ -60,7 +60,7 @@ public class PersonServiceImplTest {
     }
 
     @Test
-    public void testUpdatePerson_found() {
+    public void testUpdatePerson() {
         Person updated = new Person("John", "Doe", "1509 Culver St", "Paris", "75000", "999-999-9999", "new@email.com");
         when(personRepository.findByFullName(anyString(), anyString())).thenReturn(person1);
         boolean updatedResult = personService.updatePerson(updated);
@@ -70,7 +70,7 @@ public class PersonServiceImplTest {
     }
 
     @Test
-    public void testUpdatePerson_notFound() {
+    public void testUpdatePersonNotFound() {
         when(personRepository.findByFullName(anyString(), anyString())).thenReturn(null);
         Person unknown = new Person("Ghost", "Guy", "N/A", "Nowhere", "00000", "000-000-0000", "ghost@guy.com");
         boolean updated = personService.updatePerson(unknown);
@@ -79,7 +79,7 @@ public class PersonServiceImplTest {
     }
 
     @Test
-    public void testDeletePerson_found() {
+    public void testDeletePerson() {
         when(personRepository.findByFullName(anyString(), anyString())).thenReturn(person2);
         boolean deleted = personService.deletePerson("Jane", "Doe");
 
@@ -88,7 +88,7 @@ public class PersonServiceImplTest {
     }
 
     @Test
-    public void testDeletePerson_notFound() {
+    public void testDeletePersonNotFound() {
         when(personRepository.findByFullName(anyString(), anyString())).thenReturn(null);
         boolean deleted = personService.deletePerson("Ghost", "Guy");
 
