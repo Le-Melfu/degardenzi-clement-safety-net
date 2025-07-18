@@ -1,5 +1,6 @@
 package com.safetynet.model;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 @Getter
@@ -8,6 +9,10 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor(force = true)
 public class FirestationMapping {
+
+    @NotBlank
     private final String address;
+
+    @NotBlank
     private final String station;
 }
