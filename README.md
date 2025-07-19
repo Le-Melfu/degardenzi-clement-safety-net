@@ -15,9 +15,7 @@ SafetyNet Alerts simulates an emergency service platform that:
 - Finds residents by last name or city
 - Manages persons, fire stations, and medical records
 
-You can access the swagger at while running locally:
-
-http://localhost:8080/swagger-ui/index.html#/
+While running locally you can access the swagger at: http://localhost:8080/swagger-ui/index.html#/
 
 ---
 
