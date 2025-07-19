@@ -1,6 +1,6 @@
 package com.safetynet.service.implementations;
 
-import com.safetynet.model.Firestation;
+import com.safetynet.model.FirestationMapping;
 import com.safetynet.model.MedicalRecord;
 import com.safetynet.model.Person;
 import com.safetynet.model.dto.*;
@@ -8,6 +8,7 @@ import com.safetynet.service.interfaces.AlertService;
 import com.safetynet.service.interfaces.FirestationService;
 import com.safetynet.service.interfaces.MedicalRecordService;
 import com.safetynet.service.interfaces.PersonService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
+@Slf4j
 @Service
 public class AlertServiceImpl implements AlertService {
 
@@ -41,18 +43,13 @@ public class AlertServiceImpl implements AlertService {
         List<PersonPublicInfosDTO> otherMembers = new ArrayList<>();
 
         for (Person p : residents) {
-            try {
-                String birthdate = medicalRecordService.getBirthdate(p.getFirstName(), p.getLastName());
-                int age = medicalRecordService.calculateAge(birthdate);
+            String birthdate = medicalRecordService.getBirthdate(p.getFirstName(), p.getLastName());
+            int age = medicalRecordService.calculateAge(birthdate, p.getFirstName(), p.getLastName());
 
-                if (age <= 18) {
-                    children.add(new ChildDTO(p.getFirstName(), p.getLastName(), age));
-                } else {
-                    otherMembers.add(new PersonPublicInfosDTO(p.getFirstName(), p.getLastName(), p.getAddress(), p.getPhone()));
-                }
-
-            } catch (IllegalArgumentException e) {
-                // TODO: add log
+            if (age <= 18) {
+                children.add(new ChildDTO(p.getFirstName(), p.getLastName(), age));
+            } else {
+                otherMembers.add(new PersonPublicInfosDTO(p.getFirstName(), p.getLastName(), p.getAddress(), p.getPhone()));
             }
         }
 
@@ -62,6 +59,9 @@ public class AlertServiceImpl implements AlertService {
     @Override
     public List<String> getPhoneNumbersByStation(String stationNumber) {
         List<String> addresses = firestationService.getStationAdresses(stationNumber);
+        if (addresses.isEmpty()) {
+            return null;
+        }
         return addresses.stream()
                 .flatMap(address -> personService.getPersonsByAddress(address).stream())
                 .map(Person::getPhone)
@@ -72,8 +72,9 @@ public class AlertServiceImpl implements AlertService {
 
     @Override
     public FireIncidentDTO getFireIncidentByAddress(String address) {
-        Firestation station = firestationService.getFirestationByAddress(address);
+        FirestationMapping station = firestationService.getFirestationByAddress(address);
         if (station == null) {
+            log.info("No station found for adress {}", address);
             return null;
         }
         String stationNumber = station.getStation();
@@ -85,7 +86,7 @@ public class AlertServiceImpl implements AlertService {
                     person.getFirstName(), person.getLastName());
 
 
-            int age = medicalRecordService.calculateAge(record != null ? record.getBirthdate() : null);
+            int age = medicalRecordService.calculateAge(record != null ? record.getBirthdate() : null, person.getFirstName(), person.getLastName());
 
             return new PersonWithMedicalDataDTO(
                     person.getFirstName(),
@@ -108,6 +109,9 @@ public class AlertServiceImpl implements AlertService {
         for (String stationNumber : stationNumbers) {
             // Get adresses served by this station
             List<String> addresses = firestationService.getStationAdresses(stationNumber);
+            if (addresses.isEmpty()) {
+                continue;
+            }
             List<HouseholdWithMedicalDataDTO> households = new ArrayList<>();
 
             for (String address : addresses) {
@@ -117,7 +121,7 @@ public class AlertServiceImpl implements AlertService {
                 List<PersonWithMedicalDataDTO> residentsDTO = residents.stream()
                         .map(person -> {
                             MedicalRecord record = medicalRecordService.getMedicalRecordByFullName(person.getFirstName(), person.getLastName());
-                            int age = medicalRecordService.calculateAge(record != null ? record.getBirthdate() : null);
+                            int age = medicalRecordService.calculateAge(record != null ? record.getBirthdate() : null, person.getFirstName(), person.getLastName());
                             return new PersonWithMedicalDataDTO(
                                     person.getFirstName(),
                                     person.getLastName(),
@@ -147,7 +151,7 @@ public class AlertServiceImpl implements AlertService {
                 .filter(p -> p.getLastName().equalsIgnoreCase(lastName))
                 .map(p -> {
                     MedicalRecord record = medicalRecordService.getMedicalRecordByFullName(p.getFirstName(), p.getLastName());
-                    int age = medicalRecordService.calculateAge(record != null ? record.getBirthdate() : null);
+                    int age = medicalRecordService.calculateAge(record != null ? record.getBirthdate() : null, p.getFirstName(), p.getLastName());
                     return new PersonWithMedicalDataDTO(
                             p.getFirstName(),
                             p.getLastName(),

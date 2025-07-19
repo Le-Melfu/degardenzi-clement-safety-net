@@ -1,11 +1,13 @@
 package com.safetynet.controller;
 
-import com.safetynet.model.Firestation;
+import com.safetynet.model.FirestationMapping;
 import com.safetynet.model.dto.FirestationCoverageDTO;
 import com.safetynet.service.interfaces.FirestationService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,11 +28,19 @@ public class FirestationController {
     )
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Coverage data returned successfully"),
-            @ApiResponse(responseCode = "400", description = "Missing or invalid station number")
+            @ApiResponse(responseCode = "400", description = "Missing or invalid station number"),
+            @ApiResponse(responseCode = "404", description = "Station was not found")
     })
     @GetMapping(params = "stationNumber")
-    public FirestationCoverageDTO getCoverageByStation(@RequestParam String stationNumber) {
-        return firestationService.getPersonsCoveredByStation(stationNumber);
+    public ResponseEntity<FirestationCoverageDTO> getCoverageByStation(@RequestParam String stationNumber) {
+        FirestationCoverageDTO response = firestationService.getPersonsCoveredByStation(stationNumber);
+
+        if (response == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .build();
+        }
+
+        return ResponseEntity.ok(response);
     }
 
     // ➕ POST — Create new mapping
@@ -44,8 +54,8 @@ public class FirestationController {
             @ApiResponse(responseCode = "400", description = "Invalid input")
     })
     @PostMapping
-    public ResponseEntity<Void> createMapping(@RequestBody Firestation firestation) {
-        boolean created = firestationService.createNewFirestation(firestation);
+    public ResponseEntity<Void> createMapping(@RequestBody @Valid FirestationMapping firestationMapping) {
+        boolean created = firestationService.createNewFirestation(firestationMapping);
         return created
                 ? ResponseEntity.status(201).build()
                 : ResponseEntity.status(409).build();
@@ -62,8 +72,8 @@ public class FirestationController {
             @ApiResponse(responseCode = "400", description = "Invalid input")
     })
     @PutMapping
-    public ResponseEntity<Void> updateMapping(@RequestBody Firestation firestation) {
-        boolean updated = firestationService.updateFirestation(firestation);
+    public ResponseEntity<Void> updateMapping(@RequestBody @Valid FirestationMapping firestationMapping) {
+        boolean updated = firestationService.updateFirestation(firestationMapping);
         return updated
                 ? ResponseEntity.ok().build()
                 : ResponseEntity.notFound().build();

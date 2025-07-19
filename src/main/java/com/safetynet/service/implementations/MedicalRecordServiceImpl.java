@@ -3,13 +3,15 @@ package com.safetynet.service.implementations;
 import com.safetynet.model.MedicalRecord;
 import com.safetynet.repository.interfaces.MedicalRecordRepository;
 import com.safetynet.service.interfaces.MedicalRecordService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
+import java.time.format.DateTimeParseException;
 
+@Slf4j
 @Service
 public class MedicalRecordServiceImpl implements MedicalRecordService {
 
@@ -27,18 +29,6 @@ public class MedicalRecordServiceImpl implements MedicalRecordService {
     @Override
     public String getBirthdate(String firstName, String lastName) {
         return medicalRecordRepository.getBirthdateByFullName(firstName, lastName);
-    }
-
-    @Override
-    public List<String> getMedications(String firstName, String lastName) {
-        MedicalRecord record = getMedicalRecordByFullName(firstName, lastName);
-        return record != null ? record.getMedications() : List.of();
-    }
-
-    @Override
-    public List<String> getAllergies(String firstName, String lastName) {
-        MedicalRecord record = getMedicalRecordByFullName(firstName, lastName);
-        return record != null ? record.getAllergies() : List.of();
     }
 
     @Override
@@ -69,13 +59,19 @@ public class MedicalRecordServiceImpl implements MedicalRecordService {
     }
 
     @Override
-    public int calculateAge(String birthdate) {
+    public int calculateAge(String birthdate, String firstName, String lastName) {
         if (birthdate == null || birthdate.isBlank()) {
-            throw new IllegalArgumentException("Birthdate is missing for this person");
+            log.info("Birthdate is missing for this person: {} {}", firstName, lastName);
+            return 0;
         }
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
-        LocalDate birth = LocalDate.parse(birthdate, formatter);
-        return Period.between(birth, LocalDate.now()).getYears();
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+            LocalDate birth = LocalDate.parse(birthdate, formatter);
+            return Period.between(birth, LocalDate.now()).getYears();
+        } catch (DateTimeParseException e) {
+            log.error("Unable to parse birthdate '{}' for user {} {}: {}", birthdate, firstName, lastName, e.getMessage());
+            return 0;
+        }
     }
 }

@@ -1,5 +1,6 @@
 package com.safetynet.model;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 @Getter
@@ -7,7 +8,11 @@ import lombok.*;
 @EqualsAndHashCode(of = {"address", "station"})
 @AllArgsConstructor
 @NoArgsConstructor(force = true)
-public class Firestation {
+public class FirestationMapping {
+
+    @NotBlank
     private final String address;
+
+    @NotBlank
     private final String station;
 }

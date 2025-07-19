@@ -22,19 +22,10 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public Person getPersonByFullName(String firstName, String lastName) {
-        return personRepository.findByFullName(firstName, lastName);
-    }
-
-    @Override
     public List<Person> getPersonsByAddress(String address) {
         return personRepository.findByAddress(address);
     }
 
-    @Override
-    public List<Person> getPersonsByLastName(String lastName) {
-        return personRepository.findByLastName(lastName);
-    }
 
     @Override
     public boolean addPerson(Person person) {

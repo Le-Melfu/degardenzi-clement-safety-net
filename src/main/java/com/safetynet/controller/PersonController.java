@@ -5,9 +5,9 @@ import com.safetynet.service.interfaces.PersonService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 
 @RestController
 @RequestMapping("/person")
@@ -26,17 +26,17 @@ public class PersonController {
             description = "Creates a new person in the system. If the person already exists, the request will be ignored."
     )
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Person successfully created"),
+            @ApiResponse(responseCode = "201", description = "Person successfully created"),
             @ApiResponse(responseCode = "409", description = "Person already exists"),
             @ApiResponse(responseCode = "400", description = "Invalid request body")
     })
     @PostMapping
-    public ResponseEntity<Void> createPerson(@RequestBody Person person) {
+    public ResponseEntity<Void> createPerson(@RequestBody @Valid Person person) {
         boolean created = personService.addPerson(person);
         if (!created) {
             return ResponseEntity.status(409).build();
         }
-        return ResponseEntity.ok().build();
+        return ResponseEntity.status(201).build();
     }
 
     // 🔁 PUT
@@ -50,7 +50,7 @@ public class PersonController {
             @ApiResponse(responseCode = "400", description = "Invalid request body")
     })
     @PutMapping
-    public ResponseEntity<Void> updatePerson(@RequestBody Person updatedPerson) {
+    public ResponseEntity<Void> updatePerson(@RequestBody @Valid Person updatedPerson) {
         boolean updated = personService.updatePerson(updatedPerson);
         if (!updated) {
             return ResponseEntity.notFound().build();

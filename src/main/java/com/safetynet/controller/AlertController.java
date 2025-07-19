@@ -49,14 +49,19 @@ public class AlertController {
     )
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Phone numbers returned successfully"),
-            @ApiResponse(responseCode = "204", description = "No residents found for the station number")
+            @ApiResponse(responseCode = "204", description = "No residents found for the station number"),
+            @ApiResponse(responseCode = "404", description = "Station not found")
     })
     @GetMapping("/phoneAlert")
     public ResponseEntity<List<String>> getPhoneNumbersByStation(@RequestParam String stationNumber) {
         List<String> phones = alertService.getPhoneNumbersByStation(stationNumber);
-        return phones.isEmpty()
-                ? ResponseEntity.noContent().build()
-                : ResponseEntity.ok(phones);
+        if (phones == null) {
+            return ResponseEntity.notFound().build();
+        }
+        if (phones.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(phones);
     }
 
 
@@ -84,6 +89,7 @@ public class AlertController {
     )
     @ApiResponse(responseCode = "200", description = "Flood coverage returned")
     @ApiResponse(responseCode = "400", description = "Invalid station list")
+    @ApiResponse(responseCode = "400", description = "The station requested were not found")
     @GetMapping("/flood/stations")
     public ResponseEntity<List<StationFloodCoverageDTO>> getFloodCoverage(@RequestParam List<String> stations) {
         if (stations == null || stations.isEmpty()) {
@@ -91,6 +97,10 @@ public class AlertController {
         }
 
         List<StationFloodCoverageDTO> stationFloodCoverageDTOS = alertService.getStationsFloodCoverage(stations);
+
+        if (stationFloodCoverageDTOS.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
 
         return ResponseEntity.ok(stationFloodCoverageDTOS);
     }
@@ -121,6 +131,7 @@ public class AlertController {
             description = "Returns email addresses of all residents living in the given city."
     )
     @ApiResponse(responseCode = "200", description = "Email list returned")
+    @ApiResponse(responseCode = "204", description = "No email found for this city")
     @ApiResponse(responseCode = "400", description = "City is missing or invalid")
     @GetMapping("/communityEmail")
     public ResponseEntity<List<String>> getEmailsByCity(@RequestParam String city) {
@@ -129,7 +140,9 @@ public class AlertController {
         }
 
         List<String> emails = alertService.getEmailsByCity(city);
-
+        if (emails.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
         return ResponseEntity.ok(emails);
     }
 }
