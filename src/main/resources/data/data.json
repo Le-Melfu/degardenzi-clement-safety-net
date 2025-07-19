@@ -191,6 +191,14 @@
     "zip" : "59000",
     "phone" : "999-888-999",
     "email" : "clementdegardenzi@mail.fr"
+  }, {
+    "firstName" : "Mélanie",
+    "lastName" : "Chabrol",
+    "address" : "127.0.0.1",
+    "city" : "Lille",
+    "zip" : "59200",
+    "phone" : "888-888-777",
+    "email" : "melanie.chabrol@mail.com"
   } ],
   "medicalrecords" : [ {
     "firstName" : "John",
@@ -330,6 +338,18 @@
     "birthdate" : "08/06/1945",
     "medications" : [ "tradoxidine:400mg" ],
     "allergies" : [ ]
+  }, {
+    "firstName" : "Mélanie",
+    "lastName" : "Chabrol",
+    "birthdate" : "07/28/1995",
+    "medications" : [ ],
+    "allergies" : [ ]
+  }, {
+    "firstName" : "Clément",
+    "lastName" : "Degardenzi",
+    "birthdate" : "05/15/1992",
+    "medications" : [ "Belladona" ],
+    "allergies" : [ "Pollen", "Valeriane" ]
   } ],
   "firestationMappings" : [ {
     "address" : "1509 Culver St",
@@ -370,5 +390,8 @@
   }, {
     "address" : "951 LoneTree Rd",
     "station" : "2"
+  }, {
+    "address" : "127.0.0.1",
+    "station" : "5"
   } ]
 }

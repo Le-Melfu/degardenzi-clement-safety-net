@@ -9,7 +9,6 @@ import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-
 @RestController
 @RequestMapping("/person")
 public class PersonController {
@@ -37,7 +36,7 @@ public class PersonController {
         if (!created) {
             return ResponseEntity.status(409).build();
         }
-        return ResponseEntity.ok().build();
+        return ResponseEntity.status(201).build();
     }
 
     // 🔁 PUT
@@ -51,7 +50,7 @@ public class PersonController {
             @ApiResponse(responseCode = "400", description = "Invalid request body")
     })
     @PutMapping
-    public ResponseEntity<Void> updatePerson(@RequestBody Person updatedPerson) {
+    public ResponseEntity<Void> updatePerson(@RequestBody @Valid Person updatedPerson) {
         boolean updated = personService.updatePerson(updatedPerson);
         if (!updated) {
             return ResponseEntity.notFound().build();

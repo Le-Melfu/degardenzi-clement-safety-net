@@ -35,6 +35,5 @@ SafetyNet Alerts simulates an emergency service platform that:
 
 - Java 21+
 - Maven 3.8+
-- Git & a modern IDE (IntelliJ IDEA, VS Code, etc.)
 
 

@@ -5,6 +5,7 @@ import com.safetynet.service.interfaces.MedicalRecordService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,7 +30,7 @@ public class MedicalRecordController {
             @ApiResponse(responseCode = "400", description = "Invalid request body")
     })
     @PostMapping
-    public ResponseEntity<Void> createMedicalRecord(@RequestBody MedicalRecord record) {
+    public ResponseEntity<Void> createMedicalRecord(@RequestBody @Valid MedicalRecord record) {
         boolean created = medicalRecordService.addMedicalRecord(record);
         return created
                 ? ResponseEntity.status(201).build()
@@ -47,7 +48,7 @@ public class MedicalRecordController {
             @ApiResponse(responseCode = "400", description = "Invalid request body")
     })
     @PutMapping
-    public ResponseEntity<Void> updateMedicalRecord(@RequestBody MedicalRecord record) {
+    public ResponseEntity<Void> updateMedicalRecord(@RequestBody @Valid MedicalRecord record) {
         boolean updated = medicalRecordService.updateMedicalRecord(record);
         return updated
                 ? ResponseEntity.ok().build()

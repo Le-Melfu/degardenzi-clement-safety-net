@@ -6,6 +6,7 @@ import com.safetynet.service.interfaces.FirestationService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -53,7 +54,7 @@ public class FirestationController {
             @ApiResponse(responseCode = "400", description = "Invalid input")
     })
     @PostMapping
-    public ResponseEntity<Void> createMapping(@RequestBody FirestationMapping firestationMapping) {
+    public ResponseEntity<Void> createMapping(@RequestBody @Valid FirestationMapping firestationMapping) {
         boolean created = firestationService.createNewFirestation(firestationMapping);
         return created
                 ? ResponseEntity.status(201).build()
@@ -71,7 +72,7 @@ public class FirestationController {
             @ApiResponse(responseCode = "400", description = "Invalid input")
     })
     @PutMapping
-    public ResponseEntity<Void> updateMapping(@RequestBody FirestationMapping firestationMapping) {
+    public ResponseEntity<Void> updateMapping(@RequestBody @Valid FirestationMapping firestationMapping) {
         boolean updated = firestationService.updateFirestation(firestationMapping);
         return updated
                 ? ResponseEntity.ok().build()
