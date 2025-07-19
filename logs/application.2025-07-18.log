@@ -1,0 +1,156 @@
+2025-07-18 12:49:26.243 [main] INFO  com.safetynet.controller.AlertControllerTest - Starting AlertControllerTest using Java 21.0.6 with PID 10116 (started by degar in D:\005-DEV\02_DEVELOPPEUR_JAVA\05_Safety_Net\degardenzi-clement-safety-net)
+2025-07-18 12:49:26.247 [main] INFO  com.safetynet.controller.AlertControllerTest - No active profile set, falling back to 1 default profile: "default"
+2025-07-18 12:49:29.137 [main] INFO  com.safetynet.controller.AlertControllerTest - Started AlertControllerTest in 3.672 seconds (process running for 6.446)
+2025-07-18 12:49:29.284 [main] INFO  com.safetynet.logging.LoggingInterceptor - Incoming request: GET /phoneAlert from 127.0.0.1
+2025-07-18 12:49:29.383 [main] INFO  com.safetynet.logging.LoggingInterceptor - Response status: 200
+2025-07-18 12:49:29.491 [main] INFO  com.safetynet.logging.LoggingInterceptor - Incoming request: GET /fire from 127.0.0.1
+2025-07-18 12:49:29.515 [main] INFO  com.safetynet.logging.LoggingInterceptor - Response status: 200
+2025-07-18 12:49:29.523 [main] INFO  com.safetynet.logging.LoggingInterceptor - Incoming request: GET /communityEmail from 127.0.0.1
+2025-07-18 12:49:29.524 [main] INFO  com.safetynet.logging.LoggingInterceptor - Response status: 400
+2025-07-18 12:49:29.531 [main] INFO  com.safetynet.logging.LoggingInterceptor - Incoming request: GET /personInfosLastName from 127.0.0.1
+2025-07-18 12:49:29.532 [main] INFO  com.safetynet.logging.LoggingInterceptor - Response status: 404
+2025-07-18 12:49:29.540 [main] INFO  com.safetynet.logging.LoggingInterceptor - Incoming request: GET /childAlert from 127.0.0.1
+2025-07-18 12:49:29.552 [main] INFO  com.safetynet.logging.LoggingInterceptor - Response status: 200
+2025-07-18 12:49:29.585 [main] INFO  com.safetynet.logging.LoggingInterceptor - Incoming request: GET /fire from 127.0.0.1
+2025-07-18 12:49:29.586 [main] INFO  com.safetynet.logging.LoggingInterceptor - Response status: 404
+2025-07-18 12:49:29.591 [main] INFO  com.safetynet.logging.LoggingInterceptor - Incoming request: GET /phoneAlert from 127.0.0.1
+2025-07-18 12:49:29.592 [main] INFO  com.safetynet.logging.LoggingInterceptor - Response status: 204
+2025-07-18 12:49:29.598 [main] INFO  com.safetynet.logging.LoggingInterceptor - Incoming request: GET /communityEmail from 127.0.0.1
+2025-07-18 12:49:29.599 [main] INFO  com.safetynet.logging.LoggingInterceptor - Response status: 200
+2025-07-18 12:49:29.606 [main] INFO  com.safetynet.logging.LoggingInterceptor - Incoming request: GET /flood/stations from 127.0.0.1
+2025-07-18 12:49:29.613 [main] INFO  com.safetynet.logging.LoggingInterceptor - Response status: 200
+2025-07-18 12:49:29.620 [main] INFO  com.safetynet.logging.LoggingInterceptor - Incoming request: GET /flood/stations from 127.0.0.1
+2025-07-18 12:49:29.621 [main] INFO  com.safetynet.logging.LoggingInterceptor - Response status: 400
+2025-07-18 12:49:29.630 [main] INFO  com.safetynet.logging.LoggingInterceptor - Incoming request: GET /personInfosLastName from 127.0.0.1
+2025-07-18 12:49:29.636 [main] INFO  com.safetynet.logging.LoggingInterceptor - Response status: 200
+2025-07-18 12:49:29.743 [main] INFO  com.safetynet.controller.FirestationControllerTest - Starting FirestationControllerTest using Java 21.0.6 with PID 10116 (started by degar in D:\005-DEV\02_DEVELOPPEUR_JAVA\05_Safety_Net\degardenzi-clement-safety-net)
+2025-07-18 12:49:29.743 [main] INFO  com.safetynet.controller.FirestationControllerTest - No active profile set, falling back to 1 default profile: "default"
+2025-07-18 12:49:30.136 [main] INFO  com.safetynet.controller.FirestationControllerTest - Started FirestationControllerTest in 0.442 seconds (process running for 7.445)
+2025-07-18 12:49:30.143 [main] INFO  com.safetynet.logging.LoggingInterceptor - Incoming request: GET /firestation from 127.0.0.1
+2025-07-18 12:49:30.153 [main] INFO  com.safetynet.logging.LoggingInterceptor - Response status: 200
+2025-07-18 12:49:30.159 [main] INFO  com.safetynet.logging.LoggingInterceptor - Incoming request: DELETE /firestation from 127.0.0.1
+2025-07-18 12:49:30.161 [main] INFO  com.safetynet.logging.LoggingInterceptor - Response status: 404
+2025-07-18 12:49:30.170 [main] INFO  com.safetynet.logging.LoggingInterceptor - Incoming request: POST /firestation from 127.0.0.1
+2025-07-18 12:49:30.186 [main] INFO  com.safetynet.logging.LoggingInterceptor - Response status: 201
+2025-07-18 12:49:30.193 [main] INFO  com.safetynet.logging.LoggingInterceptor - Incoming request: PUT /firestation from 127.0.0.1
+2025-07-18 12:49:30.195 [main] INFO  com.safetynet.logging.LoggingInterceptor - Response status: 200
+2025-07-18 12:49:30.201 [main] INFO  com.safetynet.logging.LoggingInterceptor - Incoming request: PUT /firestation from 127.0.0.1
+2025-07-18 12:49:30.202 [main] INFO  com.safetynet.logging.LoggingInterceptor - Response status: 404
+2025-07-18 12:49:30.208 [main] INFO  com.safetynet.logging.LoggingInterceptor - Incoming request: GET /firestation from 127.0.0.1
+2025-07-18 12:49:30.209 [main] INFO  com.safetynet.logging.LoggingInterceptor - Response status: 404
+2025-07-18 12:49:30.214 [main] INFO  com.safetynet.logging.LoggingInterceptor - Incoming request: POST /firestation from 127.0.0.1
+2025-07-18 12:49:30.216 [main] INFO  com.safetynet.logging.LoggingInterceptor - Response status: 409
+2025-07-18 12:49:30.221 [main] INFO  com.safetynet.logging.LoggingInterceptor - Incoming request: DELETE /firestation from 127.0.0.1
+2025-07-18 12:49:30.222 [main] INFO  com.safetynet.logging.LoggingInterceptor - Response status: 204
+2025-07-18 12:49:30.299 [main] INFO  com.safetynet.controller.MedicalRecordControllerTest - Starting MedicalRecordControllerTest using Java 21.0.6 with PID 10116 (started by degar in D:\005-DEV\02_DEVELOPPEUR_JAVA\05_Safety_Net\degardenzi-clement-safety-net)
+2025-07-18 12:49:30.300 [main] INFO  com.safetynet.controller.MedicalRecordControllerTest - No active profile set, falling back to 1 default profile: "default"
+2025-07-18 12:49:30.624 [main] INFO  com.safetynet.controller.MedicalRecordControllerTest - Started MedicalRecordControllerTest in 0.381 seconds (process running for 7.934)
+2025-07-18 12:49:30.631 [main] INFO  com.safetynet.logging.LoggingInterceptor - Incoming request: PUT /medicalRecord from 127.0.0.1
+2025-07-18 12:49:30.636 [main] INFO  com.safetynet.logging.LoggingInterceptor - Response status: 200
+2025-07-18 12:49:30.643 [main] INFO  com.safetynet.logging.LoggingInterceptor - Incoming request: PUT /medicalRecord from 127.0.0.1
+2025-07-18 12:49:30.644 [main] INFO  com.safetynet.logging.LoggingInterceptor - Response status: 404
+2025-07-18 12:49:30.649 [main] INFO  com.safetynet.logging.LoggingInterceptor - Incoming request: DELETE /medicalRecord from 127.0.0.1
+2025-07-18 12:49:30.650 [main] INFO  com.safetynet.logging.LoggingInterceptor - Response status: 404
+2025-07-18 12:49:30.657 [main] INFO  com.safetynet.logging.LoggingInterceptor - Incoming request: POST /medicalRecord from 127.0.0.1
+2025-07-18 12:49:30.659 [main] INFO  com.safetynet.logging.LoggingInterceptor - Response status: 201
+2025-07-18 12:49:30.666 [main] INFO  com.safetynet.logging.LoggingInterceptor - Incoming request: POST /medicalRecord from 127.0.0.1
+2025-07-18 12:49:30.667 [main] INFO  com.safetynet.logging.LoggingInterceptor - Response status: 409
+2025-07-18 12:49:30.672 [main] INFO  com.safetynet.logging.LoggingInterceptor - Incoming request: DELETE /medicalRecord from 127.0.0.1
+2025-07-18 12:49:30.673 [main] INFO  com.safetynet.logging.LoggingInterceptor - Response status: 204
+2025-07-18 12:49:30.720 [main] INFO  com.safetynet.controller.PersonControllerTest - Starting PersonControllerTest using Java 21.0.6 with PID 10116 (started by degar in D:\005-DEV\02_DEVELOPPEUR_JAVA\05_Safety_Net\degardenzi-clement-safety-net)
+2025-07-18 12:49:30.720 [main] INFO  com.safetynet.controller.PersonControllerTest - No active profile set, falling back to 1 default profile: "default"
+2025-07-18 12:49:31.016 [main] INFO  com.safetynet.controller.PersonControllerTest - Started PersonControllerTest in 0.323 seconds (process running for 8.325)
+2025-07-18 12:49:31.021 [main] INFO  com.safetynet.logging.LoggingInterceptor - Incoming request: POST /person from 127.0.0.1
+2025-07-18 12:49:31.025 [main] INFO  com.safetynet.logging.LoggingInterceptor - Response status: 409
+2025-07-18 12:49:31.031 [main] INFO  com.safetynet.logging.LoggingInterceptor - Incoming request: PUT /person from 127.0.0.1
+2025-07-18 12:49:31.032 [main] INFO  com.safetynet.logging.LoggingInterceptor - Response status: 200
+2025-07-18 12:49:31.037 [main] INFO  com.safetynet.logging.LoggingInterceptor - Incoming request: DELETE /person from 127.0.0.1
+2025-07-18 12:49:31.039 [main] INFO  com.safetynet.logging.LoggingInterceptor - Response status: 204
+2025-07-18 12:49:31.044 [main] INFO  com.safetynet.logging.LoggingInterceptor - Incoming request: PUT /person from 127.0.0.1
+2025-07-18 12:49:31.046 [main] INFO  com.safetynet.logging.LoggingInterceptor - Response status: 404
+2025-07-18 12:49:31.050 [main] INFO  com.safetynet.logging.LoggingInterceptor - Incoming request: DELETE /person from 127.0.0.1
+2025-07-18 12:49:31.051 [main] INFO  com.safetynet.logging.LoggingInterceptor - Response status: 404
+2025-07-18 12:49:31.056 [main] INFO  com.safetynet.logging.LoggingInterceptor - Incoming request: POST /person from 127.0.0.1
+2025-07-18 12:49:31.057 [main] INFO  com.safetynet.logging.LoggingInterceptor - Response status: 200
+2025-07-18 12:49:31.338 [main] INFO  com.safetynet.service.implementations.AlertServiceImpl - No station found for adress 123 Street
+2025-07-18 12:49:31.542 [main] INFO  com.safetynet.service.implementations.MedicalRecordServiceImpl - Birthdate is missing for this person: test test
+2025-07-18 12:49:31.553 [main] INFO  com.safetynet.service.implementations.MedicalRecordServiceImpl - Birthdate is missing for this person: test test
+2025-07-18 12:49:31.557 [main] ERROR com.safetynet.service.implementations.MedicalRecordServiceImpl - Unable to parse birthdate 'ad/ad' for user test test: Text 'ad/ad' could not be parsed at index 0
+2025-07-18 12:58:29.294 [main] INFO  com.safetynet.controller.AlertControllerTest - Starting AlertControllerTest using Java 21.0.6 with PID 11260 (started by degar in D:\005-DEV\02_DEVELOPPEUR_JAVA\05_Safety_Net\degardenzi-clement-safety-net)
+2025-07-18 12:58:29.295 [main] INFO  com.safetynet.controller.AlertControllerTest - No active profile set, falling back to 1 default profile: "default"
+2025-07-18 12:58:31.901 [main] INFO  com.safetynet.controller.AlertControllerTest - Started AlertControllerTest in 3.399 seconds (process running for 6.024)
+2025-07-18 12:58:32.017 [main] INFO  com.safetynet.logging.LoggingInterceptor - Incoming request: GET /phoneAlert from 127.0.0.1
+2025-07-18 12:58:32.101 [main] INFO  com.safetynet.logging.LoggingInterceptor - Response status: 200
+2025-07-18 12:58:32.207 [main] INFO  com.safetynet.logging.LoggingInterceptor - Incoming request: GET /fire from 127.0.0.1
+2025-07-18 12:58:32.229 [main] INFO  com.safetynet.logging.LoggingInterceptor - Response status: 200
+2025-07-18 12:58:32.236 [main] INFO  com.safetynet.logging.LoggingInterceptor - Incoming request: GET /communityEmail from 127.0.0.1
+2025-07-18 12:58:32.238 [main] INFO  com.safetynet.logging.LoggingInterceptor - Response status: 400
+2025-07-18 12:58:32.244 [main] INFO  com.safetynet.logging.LoggingInterceptor - Incoming request: GET /personInfosLastName from 127.0.0.1
+2025-07-18 12:58:32.246 [main] INFO  com.safetynet.logging.LoggingInterceptor - Response status: 404
+2025-07-18 12:58:32.253 [main] INFO  com.safetynet.logging.LoggingInterceptor - Incoming request: GET /childAlert from 127.0.0.1
+2025-07-18 12:58:32.265 [main] INFO  com.safetynet.logging.LoggingInterceptor - Response status: 200
+2025-07-18 12:58:32.296 [main] INFO  com.safetynet.logging.LoggingInterceptor - Incoming request: GET /fire from 127.0.0.1
+2025-07-18 12:58:32.297 [main] INFO  com.safetynet.logging.LoggingInterceptor - Response status: 404
+2025-07-18 12:58:32.302 [main] INFO  com.safetynet.logging.LoggingInterceptor - Incoming request: GET /phoneAlert from 127.0.0.1
+2025-07-18 12:58:32.303 [main] INFO  com.safetynet.logging.LoggingInterceptor - Response status: 204
+2025-07-18 12:58:32.309 [main] INFO  com.safetynet.logging.LoggingInterceptor - Incoming request: GET /communityEmail from 127.0.0.1
+2025-07-18 12:58:32.310 [main] INFO  com.safetynet.logging.LoggingInterceptor - Response status: 200
+2025-07-18 12:58:32.316 [main] INFO  com.safetynet.logging.LoggingInterceptor - Incoming request: GET /flood/stations from 127.0.0.1
+2025-07-18 12:58:32.322 [main] INFO  com.safetynet.logging.LoggingInterceptor - Response status: 200
+2025-07-18 12:58:32.328 [main] INFO  com.safetynet.logging.LoggingInterceptor - Incoming request: GET /flood/stations from 127.0.0.1
+2025-07-18 12:58:32.329 [main] INFO  com.safetynet.logging.LoggingInterceptor - Response status: 400
+2025-07-18 12:58:32.335 [main] INFO  com.safetynet.logging.LoggingInterceptor - Incoming request: GET /personInfosLastName from 127.0.0.1
+2025-07-18 12:58:32.340 [main] INFO  com.safetynet.logging.LoggingInterceptor - Response status: 200
+2025-07-18 12:58:32.420 [main] INFO  com.safetynet.controller.FirestationControllerTest - Starting FirestationControllerTest using Java 21.0.6 with PID 11260 (started by degar in D:\005-DEV\02_DEVELOPPEUR_JAVA\05_Safety_Net\degardenzi-clement-safety-net)
+2025-07-18 12:58:32.420 [main] INFO  com.safetynet.controller.FirestationControllerTest - No active profile set, falling back to 1 default profile: "default"
+2025-07-18 12:58:32.805 [main] INFO  com.safetynet.controller.FirestationControllerTest - Started FirestationControllerTest in 0.43 seconds (process running for 6.927)
+2025-07-18 12:58:32.811 [main] INFO  com.safetynet.logging.LoggingInterceptor - Incoming request: GET /firestation from 127.0.0.1
+2025-07-18 12:58:32.820 [main] INFO  com.safetynet.logging.LoggingInterceptor - Response status: 200
+2025-07-18 12:58:32.826 [main] INFO  com.safetynet.logging.LoggingInterceptor - Incoming request: DELETE /firestation from 127.0.0.1
+2025-07-18 12:58:32.828 [main] INFO  com.safetynet.logging.LoggingInterceptor - Response status: 404
+2025-07-18 12:58:32.836 [main] INFO  com.safetynet.logging.LoggingInterceptor - Incoming request: POST /firestation from 127.0.0.1
+2025-07-18 12:58:32.851 [main] INFO  com.safetynet.logging.LoggingInterceptor - Response status: 201
+2025-07-18 12:58:32.857 [main] INFO  com.safetynet.logging.LoggingInterceptor - Incoming request: PUT /firestation from 127.0.0.1
+2025-07-18 12:58:32.858 [main] INFO  com.safetynet.logging.LoggingInterceptor - Response status: 200
+2025-07-18 12:58:32.864 [main] INFO  com.safetynet.logging.LoggingInterceptor - Incoming request: PUT /firestation from 127.0.0.1
+2025-07-18 12:58:32.866 [main] INFO  com.safetynet.logging.LoggingInterceptor - Response status: 404
+2025-07-18 12:58:32.871 [main] INFO  com.safetynet.logging.LoggingInterceptor - Incoming request: GET /firestation from 127.0.0.1
+2025-07-18 12:58:32.871 [main] INFO  com.safetynet.logging.LoggingInterceptor - Response status: 404
+2025-07-18 12:58:32.878 [main] INFO  com.safetynet.logging.LoggingInterceptor - Incoming request: POST /firestation from 127.0.0.1
+2025-07-18 12:58:32.879 [main] INFO  com.safetynet.logging.LoggingInterceptor - Response status: 409
+2025-07-18 12:58:32.885 [main] INFO  com.safetynet.logging.LoggingInterceptor - Incoming request: DELETE /firestation from 127.0.0.1
+2025-07-18 12:58:32.886 [main] INFO  com.safetynet.logging.LoggingInterceptor - Response status: 204
+2025-07-18 12:58:32.942 [main] INFO  com.safetynet.controller.MedicalRecordControllerTest - Starting MedicalRecordControllerTest using Java 21.0.6 with PID 11260 (started by degar in D:\005-DEV\02_DEVELOPPEUR_JAVA\05_Safety_Net\degardenzi-clement-safety-net)
+2025-07-18 12:58:32.942 [main] INFO  com.safetynet.controller.MedicalRecordControllerTest - No active profile set, falling back to 1 default profile: "default"
+2025-07-18 12:58:33.239 [main] INFO  com.safetynet.controller.MedicalRecordControllerTest - Started MedicalRecordControllerTest in 0.327 seconds (process running for 7.361)
+2025-07-18 12:58:33.245 [main] INFO  com.safetynet.logging.LoggingInterceptor - Incoming request: PUT /medicalRecord from 127.0.0.1
+2025-07-18 12:58:33.250 [main] INFO  com.safetynet.logging.LoggingInterceptor - Response status: 200
+2025-07-18 12:58:33.257 [main] INFO  com.safetynet.logging.LoggingInterceptor - Incoming request: PUT /medicalRecord from 127.0.0.1
+2025-07-18 12:58:33.258 [main] INFO  com.safetynet.logging.LoggingInterceptor - Response status: 404
+2025-07-18 12:58:33.263 [main] INFO  com.safetynet.logging.LoggingInterceptor - Incoming request: DELETE /medicalRecord from 127.0.0.1
+2025-07-18 12:58:33.264 [main] INFO  com.safetynet.logging.LoggingInterceptor - Response status: 404
+2025-07-18 12:58:33.271 [main] INFO  com.safetynet.logging.LoggingInterceptor - Incoming request: POST /medicalRecord from 127.0.0.1
+2025-07-18 12:58:33.273 [main] INFO  com.safetynet.logging.LoggingInterceptor - Response status: 201
+2025-07-18 12:58:33.280 [main] INFO  com.safetynet.logging.LoggingInterceptor - Incoming request: POST /medicalRecord from 127.0.0.1
+2025-07-18 12:58:33.281 [main] INFO  com.safetynet.logging.LoggingInterceptor - Response status: 409
+2025-07-18 12:58:33.286 [main] INFO  com.safetynet.logging.LoggingInterceptor - Incoming request: DELETE /medicalRecord from 127.0.0.1
+2025-07-18 12:58:33.287 [main] INFO  com.safetynet.logging.LoggingInterceptor - Response status: 204
+2025-07-18 12:58:33.337 [main] INFO  com.safetynet.controller.PersonControllerTest - Starting PersonControllerTest using Java 21.0.6 with PID 11260 (started by degar in D:\005-DEV\02_DEVELOPPEUR_JAVA\05_Safety_Net\degardenzi-clement-safety-net)
+2025-07-18 12:58:33.337 [main] INFO  com.safetynet.controller.PersonControllerTest - No active profile set, falling back to 1 default profile: "default"
+2025-07-18 12:58:33.614 [main] INFO  com.safetynet.controller.PersonControllerTest - Started PersonControllerTest in 0.306 seconds (process running for 7.736)
+2025-07-18 12:58:33.619 [main] INFO  com.safetynet.logging.LoggingInterceptor - Incoming request: POST /person from 127.0.0.1
+2025-07-18 12:58:33.624 [main] INFO  com.safetynet.logging.LoggingInterceptor - Response status: 409
+2025-07-18 12:58:33.630 [main] INFO  com.safetynet.logging.LoggingInterceptor - Incoming request: PUT /person from 127.0.0.1
+2025-07-18 12:58:33.631 [main] INFO  com.safetynet.logging.LoggingInterceptor - Response status: 200
+2025-07-18 12:58:33.636 [main] INFO  com.safetynet.logging.LoggingInterceptor - Incoming request: DELETE /person from 127.0.0.1
+2025-07-18 12:58:33.637 [main] INFO  com.safetynet.logging.LoggingInterceptor - Response status: 204
+2025-07-18 12:58:33.644 [main] INFO  com.safetynet.logging.LoggingInterceptor - Incoming request: PUT /person from 127.0.0.1
+2025-07-18 12:58:33.645 [main] INFO  com.safetynet.logging.LoggingInterceptor - Response status: 404
+2025-07-18 12:58:33.649 [main] INFO  com.safetynet.logging.LoggingInterceptor - Incoming request: DELETE /person from 127.0.0.1
+2025-07-18 12:58:33.650 [main] INFO  com.safetynet.logging.LoggingInterceptor - Response status: 404
+2025-07-18 12:58:33.656 [main] INFO  com.safetynet.logging.LoggingInterceptor - Incoming request: POST /person from 127.0.0.1
+2025-07-18 12:58:33.657 [main] INFO  com.safetynet.logging.LoggingInterceptor - Response status: 200
+2025-07-18 12:58:33.929 [main] INFO  com.safetynet.service.implementations.AlertServiceImpl - No station found for adress 123 Street
+2025-07-18 12:58:34.120 [main] INFO  com.safetynet.service.implementations.MedicalRecordServiceImpl - Birthdate is missing for this person: test test
+2025-07-18 12:58:34.133 [main] INFO  com.safetynet.service.implementations.MedicalRecordServiceImpl - Birthdate is missing for this person: test test
+2025-07-18 12:58:34.135 [main] ERROR com.safetynet.service.implementations.MedicalRecordServiceImpl - Unable to parse birthdate 'ad/ad' for user test test: Text 'ad/ad' could not be parsed at index 0

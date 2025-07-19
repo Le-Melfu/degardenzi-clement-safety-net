@@ -1,0 +1,2 @@
+2025-07-18 12:49:31.557 [main] ERROR com.safetynet.service.implementations.MedicalRecordServiceImpl - Unable to parse birthdate 'ad/ad' for user test test: Text 'ad/ad' could not be parsed at index 0
+2025-07-18 12:58:34.135 [main] ERROR com.safetynet.service.implementations.MedicalRecordServiceImpl - Unable to parse birthdate 'ad/ad' for user test test: Text 'ad/ad' could not be parsed at index 0
